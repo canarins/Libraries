@@ -1,0 +1,976 @@
+﻿A. Maesano, M. Chachoua
+
+
+
+
+
+
+
+
+
+
+
+
+Towards a new approach for multimodal air pollution assessment in real-time
+
+
+
+
+Ariele Maesano1, Mohamed Chachoua2
+
+
+
+
+Abstract –– This paper proposes a novel approach to assessing air quality in real-time using a hybrid network of fixed and mobile sensors with different technologies[a]. The aim is to develop a more accurate strategy for determining the level of air pollution in a given area, with the ultimate goal of reducing or eliminating sources of pollution. The study focuses on managing data quality in networks of heterogeneous and hybrid sensors, including accuracy, completeness, integration, consistency, and timeliness of real-time data.The aim is to develop a more efficient strategy for determining the level of air pollution in a given area, with the  ultimate goal is to identify sources of pollution, in order to reduce their impact. One of the main issues in the first part of our study concerns the quality of data, particularly from mobile sensors. This paper will focus primarily on this problem. The paper presents specific challenges and techniques for ensuring data accuracy, including sensor calibration and maintenance, data validation and quality control, and data synchronization and integration. Overall, this work contributes to the growing body of research on air quality assessment and serves as a valuable reference for researchers and policymakers working to improve public health.[b] 
+Copyright © <to be provided> - All rights reserved.
+Keywords: Air quality assessment, Sensor, Data Quality, Data fusion
+1. Introduction
+The air pollution problem, particularly in dense urban centers, is at the heart of public policy concerns. Indeed, as numerous reports from specialized organizations, including the WHO, show, the health impact is considerable. The need for spatio-temporal assessment of pollutants is paramount, on the one hand, to know the accurate exposure of the population and, on the other, to identify sources to reduce or even eliminate them.  The recent development of mobile micro-sensor technology opens up serious prospects for measuring the level of various atmospheric pollutants on an individual scale. Numerous research projects are currently being carried out in this field, which can be divided into two main areas.  The first concerns the techniques used in these micro-sensors, while the second focuses on using their measurements. Our work focuses on the latter. 
+The current development of micro-sensors to measure air pollution responds to a significant need. However, using various technologies, these sensors are subject to intrinsic and extrinsic constraints. The results of data analysis from this type of sensor depend on control of the entire data acquisition chain. In other words, supervision and data quality monitoring are essential for a reliable assessment of air pollution. This is the objective of our study in this paper.  
+This document comprises several paragraphs, each addressing a unique aspect of the study. The second paragraph reviews the existing literature on air pollution monitoring and management. It discusses the various methods and technologies used for air quality monitoring and the challenges associated with data accuracy, completeness, integration, consistency, and timeliness in air pollution monitoring. The third paragraph describes the methodology used in the study. It outlines the process of managing data quality in networks of heterogeneous and hybrid sensors, including wearable, mobile, and static sensors. The chapter provides a detailed explanation of the approach used for air pollution monitoring. The fourth paragraph provides a detailed analysis of the collected data and its accuracy, completeness, integration, consistency, and timeliness. The chapter also identifies sources and pollution patterns, crucial in developing effective measures to mitigate air pollution. The fifth section discusses the implications of the study's findings and the practical solutions proposed to address the challenges of data accuracy, completeness, integration, consistency, and timeliness. The chapter highlights the importance of high-quality accurate data in effective air quality monitoring and management.[c]
+
+
+2. Motivation and problem statement
+With the advent of the smart city, the urban system has become a producer of vast quantities of data. All city services are concerned. The main reason is that in these urban services, data is essential for both day-to-day management and development, and more specifically, for decision-making. The relevance and efficiency of these tasks depend essentially on data quality. Indeed, the greatest risk in decision-making is to rely on poor-quality data. As a result, mastering data quality is essential for reliable analysis and successful decision-making.
+Data quality deterioration can manifest itself in various ways, depending on the cause: inaccuracy, incompleteness, aberration, etc. The main question is how to assess and enrich data quality? Numerous studies have been carried out on this question, in various fields.  So, in the following section, we are going to focus on this subject, particularly in the case of air pollution assessment with hybrid sensors. 
+High-quality data is essential for efficient air quality monitoring. Our study aims to provide a real-time and precise method of determining air pollution levels in a specific location. By having high-quality data, decision-makers can identify sources and patterns of pollution, which are crucial in developing effective measures to mitigate air pollution. Our approach uses hybrid sensors of different technologies, which provide comprehensive and detailed data, enabling us to identify sources and patterns of pollution accurately. We focus on managing data quality, ensuring that the data collected is accurate, complete, consistent, and timely. This approach provides high-quality data for effective air quality monitoring and management. Our innovative and practical approach aims to improve air quality assessment and management by providing high-quality data that enables decision-makers to implement effective measures to combat air pollution.
+[d]
+This study focuses on managing data quality in networks of heterogeneous and hybrid sensors (static, mobile, wearable) for air pollution monitoring. The standard ISO/IEC 25012 classifies the Data Quality characteristics into two main categories: Inherent Data Quality and SystemDependent Data Quality [22]. From the Inherent Data Quality point of view, data quality refers to data itself, for example to data domain values and possible restrictions, relationships of data values, and metadata.
+This study concerns only the Inherent Data Quality characteristics, that is, according to ISO/IEC 25012,  accuracy, completeness, consistency, credibility, and currentness (timeliness). The inherent data quality characteristics are studied from the point of view of sensor dependability. Sensor dependability has an obvious direct relationship with ISO/IEC 25012 defined data credibility, which is “The degree to which data has attributes that are regarded as true and believable by  users in a specific context of use. Hence, we study data credibility from the point of view of the dependability of the data sources (the sensor network). According to ISO/IEC definition, credibility “includes the concept of authenticity (the truthfulness of origins, attributions, commitments)” [22]. On the other hand, there are two categories of the dependability facet of the data sources: reliability and security. In this study, we do not consider the problem related to authenticity of data, that are related to the security of the data sources. [e]This study does not consider data privacy, security, and integrity challenges, that is how to protect from leaking sensor data that may contain sensitive information, such as location data or personal identifiers (data privacy and security), and how to protect sensor data from malicious corruption or deletion (data integrity). In conclusion, the focus of this study is on the impact of sensor network reliability on data accuracy, completeness, consistency and timeliness. We will try to classify data source reliability problems and to assess the impact of each problem class to the quality of sourced data.
+Data accuracy is defined as the “degree to which data has attributes that correctly represent the true value of the intended attribute of a concept or event in a specific context of use.” Accuracy refers to the way in which an observation of the object actually reflects its real situation. Accurate data is free from error, fault or bias. It should be noted that validity is a different concept from accuracy, as it is more subjective and is based on an acceptable range of a certain attribute and a specific application scenario. Sensor malfunctions, calibration problems and data inconsistencies can affect the accuracy of the data collected. 
+The accuracy of the data can be compromised by measurement errors, which can be caused by problems such as poor sensor location or selection. In addition, due to sensor limitations, data detected at the sensor level may have an uncertainty that results in inaccurate data. In addition, due to the limitations of the sensors, the data detected at the sensors may have an uncertainty that generates inaccurate data, and a high uncertainty in the sensor readings may also lead to dirty data. 
+It should be noted that an outlier can be defined as an observation that differs significantly from others in the sample. An outlier can be an error in the data due to defects in the sensors. At the same time, an outlier can also be a significant event that represents a change in the coherent state of the real world (for example, the occurrence of a fire). Thus, data quality problems concerning outliers in this dimension refer to data errors caused by sensor faults. 
+Another manifestation of data inaccuracy is noise, which refers to any undesirable change that deviates from the original signal. This data quality problem can be caused by faulty sensors, for example due to exhausted batteries, faulty memory cells, bit errors in transmission or interference when several wireless devices are transmitting data simultaneously on the same frequency bands. Data frame distortion also reflects the problem associated with data inaccuracy and reveals data quality issues under the dimension of data volume which is detailed below [21].
+Data completeness[f] is defined as “The degree to which subject data associated with an entity has values for all expected attributes and related entity instances in a specific context of use.” [22]. Completeness refers to the extent to which all required data is present. Complete data includes all relevant fields, attributes, or variables without missing values. Incomplete data can lead to biased or inaccurate analysis and hinder decision-making. Completeness has been defined as the fact that all expected data has been provided. In the domain of networks of heterogeneous and hybrid sensors for air pollution monitoring[g], completeness must be considered as spatio-temporal completeness. Note that some studies use the term completeness, while others refer to data availability and missing data. Missing data can be due to sensor malfunction, communication problems or data interception or manipulation by hackers.
+Data consistency (or concordance) is defined as “The degree to which data has attributes that are free from contradiction and are coherent with other data in a specific context of use.” Consistency refers to the absence of contradictions or discrepancies within the data. Data is considered to be consistent when there is agreement between data elements from one data source and data elements from other individual data sources that report correlating effects. Data quality problems on this dimension manifested themselves as inconsistent readings reported by sensors for a certain object, which could be due to mismatched observations from data sources or sensor failures. Consistent data is coherent and harmonious across different sources, systems, or periods. Inconsistent data can cause confusion, make analysis difficult, and undermine the reliability of results. Consistency presupposes the capability of integrating data from multiple sensors, which may have different formats, protocols, and sampling rates. Ensuring seamless integration and synchronization of data from various sources is crucial for accurate analysis. 
+Data timeliness (currentness) is defined as “The degree to which data has attributes that are of the right age in a specific context of use” [21]. Timeliness refers to the availability of data when it is needed. Other terms adopted to describe this dimension include volatility, latency, freshness, data rate, delay and frequency. Sensor data is considered timely when the observation of an object is updated at the appropriate time. Timely data is up-to-date and relevant to the current context or analysis. Outdated or delayed data may result in inaccurate insights or decisions. Manifestations of data timeliness problems are missing updates and low data rates. An example of low data rates influencing timeliness is the deployment of devices in constrained contexts such as agriculture. In this context, devices have limited resources such as energy and need to communicate over large distances using technologies that are subject to low data rates and high latency, but require very little energy [21].
+We have observed that the manifestations of data quality problems overlap between the different dimensions of data quality that we take into account. Data loss, on the other hand, may be a data quality issue in terms of the usefulness or volume of the data. In addition, when data loss occurs during the transmission process or data is not updated in a timely manner, the data received may be missing, reflecting a data quality issue related to completeness or usefulness. Consequently, these observations imply that the dimensions of data quality are conceptually distinguished and defined according to different objectives, but that these dimensions may also interact with each other [21].
+This first version of the study does not consider data privacy, security, and integrity challenges. Data privacy and security refer to protecting sensor data that may contain sensitive information, such as location data or personal identifiers. Data integrity refers to data protection from malicious or accidental corruption or deletion.
+
+
+
+
+State of the Art 
+
+
+
+
+   1. Data Accuracy
+Some challenges in ensuring data accuracy of multi-source sensor data for air quality evaluations include (a) sensor calibration and maintenance (calibration checks, sensor calibration algorithms, maintenance protocols …), (b) sensor placement, (c) data validation and quality control (range checks, quality checks. …); (d) data synchronization and integration (timestamp alignment, data fusion algorithms, data normalization …); (e) data verification and cross-validation.
+Barr and colleagues (Bähr et al., 2022) discuss the measurement quality of geolocation sensor data and the potential sources of error that can interfere with accurate measurements. These error sources include device-related factors, environmental factors, and user-related factors. Regarding how to undertake these challenges, the study (Bähr et al., 2022) does not provide details on the methods or techniques used to address data accuracy.
+Connolly and colleagues (Connolly et al., 2022) discuss data quality concerns related to missing and incomplete data from outdoor sensors. The study (Connolly et al., 2022) also mentions using established quality assurance/quality control techniques for data processing. These techniques likely aim to address and mitigate data accuracy challenges by ensuring proper sensor functioning, calibration, and data consistency.
+Dumont Le Brazidec and colleagues (Dumont Le Brazidec et al., 2023)  mention that the assimilation process involves modeling errors rigorously and effectively to understand and quantify the releases from the Fukushima Daiichi nuclear power plant. The study (Dumont Le Brazidec et al., 2023)  proposes a Bayesian inversion approach that allows errors to be modeled rigorously and numerous observations of different natures to be assimilated simultaneously. Additionally, the study proposes the assimilation of deposition measurements or spatial and temporal information playing concentration observations by increasing the complexity of the observation error matrix to improve the accuracy of the results. Overall, the study focuses on the transdimensional sampling method to reconstruct highly fluctuating radionuclide atmospheric releases and proposes a Bayesian inversion approach that can help address data accuracy challenges. 
+Huynh and colleagues (Huynh et al., 2020) acknowledge several factors that can affect sensor data's accuracy and reliability, such as environmental factors impacting sensor performance, the lack of standard reference materials for calibration, and the need for proper calibration against standard equipment. The study (Huynh et al., 2020) emphasizes the importance of accurate calibration, harmonized standards, and data management techniques to address these challenges. 
+Karagulian and colleagues (Karagulian et al., 2019) emphasize the need to calibrate low-cost sensors to ensure their accuracy and reliability carefully. The paper notes that the calibration of low-cost sensors is generally considered confidential information by the majority of manufacturers, and little information can be found about the calibration of sensors that fall under the category "black box" compared to the ones that fall under the category "open source ". The paper (Karagulian et al., 2019) also mentions that most of the calibrations were carried out during field tests, while only a limited number of laboratory-based calibration experiments were found. It also provides information on the calibration methods used in the reviewed studies. Still, it does not provide a comprehensive guide on undertaking the data accuracy challenges associated with low-cost sensors.
+Lin and colleagues (Lin et al., 2022) identify several data accuracy challenges, including the need for effective calibration techniques due to the relatively large variance of low-cost sensors, the validation of noise, light, temperature, and VOC sensors, and the uncertainties of whether the subject is wearing and using the device correctly. The study (Lin et al., 2022) also notes little about sensor validation during mobile/personal monitoring. 
+The primary data accuracy challenges identified in (Maag et al., 2017)  are related to using low-cost air quality sensors for urban air pollution monitoring. These challenges include (a) Low selectivity: low-cost air quality sensors are cross-sensitive to various substances in the air, which can affect the accuracy of the measurements; (b) Changing environmental conditions: environmental factors such as temperature and humidity can impact the sensor output, leading to variations in the measurements over time; (c) Sensor drift: low-cost air quality sensors can drift over time, leading to inaccurate measurements: (d) calibration issues: it is essential to calibrate the air quality measurements to obtain a consistent dataset. However, existing multi-hop calibration techniques can lead to dramatic error accumulation when applied to sensor arrays, making multi-hop sensor array calibration an open question. The study (Maag et al., 2017) proposes a novel constrained multidimensional linear regression technique called Sensor Array Network Calibration (SCAN) to address the challenges associated with low-cost air quality sensors. SCAN is designed to calibrate sensor arrays and reduce error accumulation over multiple hops. The study (Maag et al., 2017) theoretically proves that SCAN is free from regression dilution, the root cause of error accumulation, even in measurement noise. The study also provides experimental results demonstrating the benefits of multi-hop calibration over one-hop calibration.
+Nguyen and colleagues (Nguyen et al., 2021) mention that sensor accuracy can be assessed based on statistical analysis of deviation data compared to data from the standard measuring device. The study (Nguyen et al., 2021) also emphasizes the importance of sensor calibration in increasing sensor efficiency by offsetting structural errors caused by sensors. It presents several calibration methods to calibrate low-cost sensors and improve their accuracy and precision. The one-point and two-point calibration methods are highly effective when the sensor errors are relatively linear with the standard measuring device. However, when the error between the sensor and the standard instrument is not linear, it is necessary to use the multipoint curve method to adjust the measurement results of the sensor. 
+To address data accuracy challenges, Scholl and colleagues (Scholl et al., 2023) suggest considering sensor precision information provided by the manufacturer, utilizing domain knowledge or data as sources to define accuracy metrics, and exploring approaches such as dynamic uncertainty.
+Vajs and colleagues (Vajs et al., 2023) focus on the challenges of calibrating low-cost sensors for air quality monitoring rather than on data accuracy specifically. However, the study does acknowledge that low-cost sensors can be influenced by weather and degradation, which can impact the accuracy and reliability of the measurements. The study (Vajs et al., 2023) proposes a data-driven machine learning calibration propagation method to address these challenges and improve the accuracy of the collected data. The calibration process is based on statistical algorithms and offset values obtained from reference measurement stations, and the study evaluates the concept of calibration propagation through a sensor network. 
+Zauli-Sajani and colleagues (Zauli-Sajani et al., 2021) mention several issues related to sensor data accuracy, including stability, cross-sensitivity, repeatability, and reproducibility problems. The article notes that manufacturers' current calibration solutions are limited to laboratory sensor testing under controlled conditions, often providing unsatisfactory results during ambient air monitoring. The article suggests that field calibration is necessary when using air quality sensors. Still, it is associated with problems related to the generalizability of specific calibration parameters and models. 
+   2. Data Completeness
+<Papier Souhier to be presented>
+Some challenges in ensuring data completeness of multi-source sensor data for air quality evaluations are (a) missing data due to sensor malfunction, communication failures, or other technical or environmental issues and (b) data gaps (periods when no data is collected or available).
+Connolly and colleagues (Connolly et al., 2022) identify data completeness challenges, particularly with outdoor sensors having lower data completeness than indoor sensors. It is mentioned that one outdoor sensor (Sensor 2) had the lowest data completeness throughout the entire study (Connolly et al., 2022) due to sensor malfunctions. The study also notes that the main reason for missing data was the instability or loss of wireless internet connection. To address these challenges, Connolly and colleagues (Connolly et al., 2022) mention a quality assurance/quality control process that involved deleting missing data and observations with data from only one channel. 
+Dumont Le Brazidec and colleagues (Dumont Le Brazidec et al., 2023) mention that the assimilation process involves incorporating deposition measurements or spatial and temporal information on the air concentration observations to increase the complexity of the observation error matrix. This suggests that incorporating additional data sources and information can help improve the completeness of the data used in the study. The study (Dumont Le Brazidec et al., 2023) focuses on the transdimensional sampling method to reconstruct highly fluctuating radionuclide atmospheric releases and does not extensively discuss data completeness challenges.
+Nguyen and colleagues (Nguyen et al., 2021) mention that the tests performed in this study were kept within the range of temperature of 15˚C - 30˚C and relative humidity of 50% - 85%. Extreme conditions like freezing/high temperature and/or relative humidity may reduce sensor accuracy. Consequently, data completeness may be affected by environmental factors such as temperature and humidity. The study (Nguyen et al., 2021) emphasizes the importance of testing environmental factors that affect sensor accuracy and precision, such as temperature and relative humidity conditions, to cover the whole range of sensor measurements fully. 
+Scholl and colleagues (Scholl et al., 2023) identify missing values as the main challenge related to data completeness in sensor systems. Incomplete data can occur for various reasons, such as sensor malfunctions, communication errors, or data transmission issues. To address the challenge of missing values, the study (Scholl et al., 2023) proposes a completeness metric that calculates the number of measured samples in a given period. The cardinality of the set of values acquired represents the number of measured samples, providing a measure of completeness. The study suggests that this metric can be used to assess the completeness of the collected data and identify any missing values. The paper (Scholl et al., 2023) also highlights the importance of acquiring sufficient samples to perform calculations such as frequency domain analyses.
+   3. Data integration and consistency
+Some challenges in ensuring data integration of multi-source sensor data for air quality evaluations are (a) data synchronization (timestamp alignment, data fusion algorithms …), (b) data standardization (concerning data formats, protocols, sampling rates …), (c) data fusion techniques (weighted averages, Bayesian inference, fuzzy logic …).
+Karagulian and colleagues (Karagulian et al., 2019) mention the lack of uniformity in the metrics representing data quality between studies, making comparing field tests of low-cost sensors challenging. This lack of uniformity suggests that integrating data from different studies may be challenging due to differences in data formats, protocols, and sampling rates.
+Scholl and colleagues (Scholl et al., 2023) identify data fusion as the main challenge related to data integration in sensor systems. To address this challenge, the study (Scholl et al., 2023) proposes utilizing fusion algorithms to integrate multiple data sources and enhance the overall quality of the collected data. The paper (Scholl et al., 2023) also highlights the importance of incorporating domain and expert knowledge in defining fusion algorithms for data quality indication.
+Zauli-Sajani and colleagues (Zauli-Sajani et al., 2021) note that a cost-effective approach for air quality monitoring would be implementing mixed networks involving reference-grade sensors and emerging sensor technologies. The study (Zauli-Sajani et al., 2021) suggests that supplementary techniques have been proposed to increase information on the spatio-temporal distribution of air pollution, including new monitoring technologies based on different types of sensors. The study also notes that recent studies have highlighted the role of monitoring location or land use in sensor calibration. While remote calibration is promising and cost-effective, it may not guarantee the same level of performance as co-location calibration.
+Some challenges in ensuring data consistency of multi-source sensor data for air quality evaluations are (a) inconsistent data format, (b) inconsistent data sampling rates (techniques such as data interpolation or resampling can be used to align the data), (c) inconsistent data quality (varying levels of quality, accuracy, or reliability of data from different sources); (d) inconsistent data definitions or units. 
+Connolly and colleagues (Connolly et al., 2022) discuss data quality concerns related to missing and incomplete data from outdoor sensors. These issues can potentially introduce inconsistencies in the data collected from different sources or periods. The study (Connolly et al., 2022) mentions a quality assurance/quality control process that involved deleting missing data and observations with abnormal temperature and relative humidity readings.
+Karagulian and colleagues (Karagulian et al., 2019) mention the lack of uniformity in the metrics representing data quality between studies, making comparing field tests of low-cost sensors challenging. This lack of uniformity suggests that ensuring data consistency across different studies may be challenging due to differences in data collection and reporting practices.
+Scholl and colleagues (Scholl et al., 2023) identify inconsistent measurements as the main challenge to data consistency in sensor systems. Inconsistent measurements deviate significantly from similar measurements, closely related in time and space. This attribute is associated with the coherence between sensor signals and is calculated based on sensors that measure the same physical quantity. The study proposes a consistency metric that calculates the absolute error over two values to address the challenge of inconsistent measurements.
+   4. Data timeliness
+Some challenges in ensuring data timeliness of multi-source sensor data for air quality evaluations are: (a) data latency: sensors may have varying degrees of latency, resulting in delayed data availability; (b) data transmission (from sensors to the data processing system), that may be affected by network congestion, signal interference, or other technical issues; (c) data processing and analysis, that may take time, especially when dealing with large volumes of data.
+Connolly and colleagues (Connolly et al., 2022) discuss challenges related to the loss of data from outdoor sensors and the instability of wireless internet connection. These challenges may indirectly impact data timeliness by introducing delays in data availability. The study (Connolly et al., 2022) notes that some outdoor sensors had missing data for months, which could result in outdated or delayed data. It suggests that future researchers and communities developing sensor networks using PA-II devices should prepare for many challenges with the upkeep of outdoor sensors to avoid such occurrences. The paper (Connolly et al., 2022) also mentions that a newer version of the PA-II sensor includes a data storage (Secure Digital, or SD) card, which could be used to supplement the data available on the network and reduce concerns related to data timeliness.
+Scholl and colleagues (Scholl et al., 2023) identify the timeliness of data availability as the main challenge related to data quality in sensor systems. The study (Scholl et al., 2023) proposes defining timeliness in the sense of currency, which means how quickly data is updated. This definition allows for the application of timeliness to sensor systems, where a common task is to measure a quantity periodically. The study (Scholl et al., 2023) proposes a timeliness metric that calculates the difference between two consecutive timestamps of sensor readings. The study also highlights the importance of considering the delay between data availability and the time point of data availability advertisement. The framework can provide a more accurate and comprehensive data quality indicator by incorporating this delay into the timeliness metric.
+
+
+3. The source and channel reliability problem in air pollution monitoring
+Problems of accuracy, completeness, consistency, and timeliness of data are provoked by a number of reliability problems concerning the reliability of the source (sensors) and the channel (transmission). 
+This paragraph discusses the reliability challenges of air pollution monitoring systems based on fixed and mobile sensors (mobile crowd-sensing environments - MCS). The mobile and fixed sensors deployed in such systems are built with sensor components lying in an extended size and cost range. Generally speaking, small electronic parts can be installed in mobile sensors and are often low-cost. At the same time, more big components are situated in fixed sensors and are more reliable and expensive. Moreover, technical and organizational problems that impact their reliability are found in the power supply, the device handling, and the geolocalization. 
+The source and channel reliability problems can be classified in a number of categories: measurement errors, noise, artifact errors, dirty data, outliers, missing data, missing updates, data loss, irregular observations, low data rate. Measurement errors are inaccuracies or deviations in the data collected and transmitted from the sensors that impact data accuracy and consistency. Noise refers to unwanted or random variations in sensor data, for example in a specific geographical region too much crowded with wireless mobile sensors, that can obscure the true signal; noise impacts data accuracy and consistency. Artifact errors are software bugs or hardware dysfunctions that produce distortions in the sensor data that are no more reflective of the actual conditions being monitored; artifact errors impact all the data quality facets: accuracy, completeness, consistency, and timeliness. Dirty data refers to data that is corrupted by manipulation (including maintenance) and environmental stress of the sensors, particularly relevant within wireless, mobile, wearable sensors; dirty data impacts data accuracy and consistency. Outliers are data points that significantly deviate from the rest of the dataset, potentially affecting the overall analysis and conclusions drawn from the data; outliers impact data accuracy and consistency. Missing data refers to incomplete datasets due to missing or omitted measurements, for example spatial and temporal gaps in data collections, which can impact the completeness of the data. Missing updates refer to delays or gaps in the updates of sensor data, potentially leading to incomplete or outdated information; missing updates impact data completeness and timeliness. Data loss is unintentional loss of sensor data, due to transmission faults, which impact the completeness of the dataset. Irregular observations are inconsistencies or irregularities in the frequency or timing of sensor observations, potentially impacting the consistency of the data. Low data rate refers to a slow or limited rate of data collection, which can impact the timeliness and completeness of the information.  
+
+
+<a diagram of impact relaibility problem - data quality facet ?>
+   5. Small vs. big components
+
+
+
+
+Small sensor components exhibit portability, flexibility, monitoring distribution, and coverage advantages. They can be integrated into compact, handheld, or wearable devices, enabling on-the-go measurements and monitoring in various environments.
+They are often more cost-effective to produce, making them accessible for a broader range of applications and users. Their compact size allows the deployment of multiple sensors across different locations, enabling distributed monitoring networks and wider coverage.
+The drawbacks of small sensor components relate to accuracy, sensitivity, detection range, and potential interference. Smaller sensor components may have limitations in accuracy and sensitivity, particularly for detecting low concentrations of pollutants. They might not provide the same precision and detail as bigger sensor components. They may have a narrower dynamic range, meaning they might not be able to detect extremely low concentrations of pollutants accurately. In some cases, smaller sensors may be more susceptible to interference from environmental factors or cross-reactivity with other compounds, potentially affecting the accuracy of measurements.
+
+
+Big sensor components exhibit advantages in accuracy, sensitivity, greater detection range, and advanced functionalities. They can potentially offer higher accuracy and sensitivity in detecting and measuring pollutants. They may be able to capture more detailed and precise data, especially for low concentrations of contaminants. They may have a more comprehensive detection range, allowing them to ascertain a broader range of pollutant concentrations (this can be beneficial in monitoring environments with varying pollution levels). Bigger sensors often benefit from technological advancements in sensors, such as improved gas sensing mechanisms or multi-spectral capabilities, enabling more sophisticated pollution detection and analysis.
+The disadvantages of big sensor components relate to size, cost, and mobility. Big sensor components tend to be physically larger and pricier to manufacture. This can limit their integration into smaller or portable pollution monitoring devices and may result in higher costs for the overall monitoring system. Their larger size can make the monitoring system less portable and more suitable for stationary or fixed monitoring applications.
+There are active and passive sensors that also have their upside and downsides. <to be provided>
+   6. Power supply
+
+
+The power supply can significantly affect the performance and accuracy of pollution sensor components, particularly in terms of source, consistency, and stability. This can impact measurement stability, calibration, lifespan, remote monitoring, and communication.
+A stable power supply is crucial for ensuring accurate and reliable measurements by pollution sensors. Fluctuations or interruptions in power can lead to erratic sensor behavior, resulting in inconsistent or inaccurate readings. It is essential to provide a steady power source to maintain the stability of the sensor components.
+Generally speaking, pollution sensors require periodic calibration to ensure accurate measurements. The power supply can influence the calibration process. Powering the sensors under the specified voltage or current conditions recommended by the manufacturer is essential to achieve optimal calibration accuracy. Inconsistent or unstable power can lead to calibration errors, compromising the reliability of the sensor data.
+In particular, power interruptions or voltage fluctuations can result in data loss or corruption. This can be particularly problematic when pollution sensors are used for continuous monitoring applications where long-term data records are essential. To ensure data quality and integrity, a reliable power supply with proper backup mechanisms should be in place to minimize the risk of data loss.
+The power supply can affect the lifespan of pollution sensor components. Abrupt power surges, voltage spikes, or inadequate power conditioning can cause premature failure or degradation of sensor components. Maintaining a stable and appropriate power supply can help prolong the lifespan of the sensors, reducing the need for frequent replacements or repairs.
+Depending on the deployment scenario, pollution sensors may be powered by various sources, such as mains electricity, batteries, or renewable energy systems. Each power source option has its advantages and limitations. Mains electricity can provide a reliable and continuous power supply for fixed installations. Batteries offer portability and flexibility but must be monitored and replaced regularly. Renewable energy systems can provide sustainable power but may require additional infrastructure for continuity and maintenance considerations.
+Power supply availability can impact the feasibility of remote monitoring and data transmission from pollution sensors. When power supply infrastructure is limited or inaccessible, alternative power solutions such as solar panels or battery-powered systems may be necessary for remote or off-grid monitoring applications.
+Overall, a stable, consistent, and appropriate power supply is essential for ensuring pollution sensor components' accurate, reliable, and long-term operation. It is necessary to consider the specific power requirements recommended by the sensor manufacturer and implement appropriate power management strategies to optimize the performance and lifespan of the sensors.
+
+
+   7. Sensor handling
+Constant manipulation or physical stress on pollution sensor components can affect their fiability and performance. Physical stress includes mechanical wear and tear, sensor drift, contamination and sensor surface damage, connectivity loss, electrical integrity, and calibration and stability loss. 
+Frequent handling and manipulation of pollution sensor components can lead to mechanical wear and tear over time. This includes physical impacts, vibrations, or bending of the sensors, which may result in component misalignment, loosening of connections, or structural damage. Such mechanical stress can compromise the accuracy and reliability of the sensor measurements.
+Moreover, manipulation or physical stress can contribute to sensor drift, where the sensor's output gradually deviates from its initial calibration. The repeated physical stress on the sensor may alter its internal structure, impacting its sensitivity, response time, or stability. This can lead to measurement inaccuracies and the need for more frequent recalibration or maintenance.
+Handling pollution sensor components without proper care can introduce contaminants or damage their delicate surfaces. Contaminants such as oils, dirt, or chemicals can adhere to the sensor surfaces, interfering with the sensing mechanism and affecting the accuracy of measurements. Physical damage to the sensor surface, such as scratches or abrasions, can also alter its optical or chemical properties, leading to measurement errors.
+Manipulation can impact the electrical connections of pollution sensor components. Repeated plugging and unplugging, bending of cables, or improper handling of connectors can lead to weakened or damaged electrical contacts. This can result in intermittent connectivity issues, increased resistance, or even complete failure of the sensor component.
+Manipulation may require more frequent calibration of the pollution sensors. Each handling or physical stress event can introduce small changes in the sensor's performance or alignment, necessitating recalibration to maintain accuracy. Additionally, the stability of the sensor's calibration may be compromised due to the varying environmental conditions imposed during manipulation.
+To mitigate these potential effects, handling pollution sensor components carefully is crucial, as following manufacturer guidelines for proper manipulation and implementing good maintenance practices. This includes minimizing unnecessary physical stress, ensuring clean and controlled environments during handling, regularly calibrating sensors, and adhering to recommended maintenance schedules. Adapting appropriate packaging or mounting solutions for sensors can also help protect them from mechanical stress and minimize the potential for degradation.
+   8. Geolocalisation
+Accurate geolocation data is of utmost importance in pollution tracking technology, as it enables precise spatial mapping and analysis of pollution sources, concentrations, and patterns. However, geolocation data's reliability can significantly impact pollution tracking systems' effectiveness and accuracy. This section explores the factors influencing geolocation data's reliability, such as signal interference, obstruction, satellite availability, signal quality, localization algorithms, and data fusion.
+A wide range of technologies is employed for geolocation, including Global Navigation Satellite Systems (GNSS) like GPS, GLONASS, Galileo, and BeiDou, as well as cellular network-based positioning methods and Wi-Fi-based positioning systems. Each technology has advantages and drawbacks that can impact the reliability of geolocation data.
+The reliability of geolocation data can be influenced by signal interference and obstructions. Geolocation accuracy can be compromised in urban areas with high-rise buildings or dense foliage due to signal blockages and multipath effects. Similarly, in environments with a high concentration of metallic structures or electromagnetic interference, such as industrial areas, the reliability of geolocation data may be affected.
+Geolocation systems utilizing GNSS rely on satellite signals, and the availability and quality of these signals can impact the reliability of geolocation data. Factors such as the number and position of visible satellites, signal strength, and atmospheric conditions can affect the accuracy and precision of geolocation measurements. Geolocation data reliability may be compromised in areas with limited satellite visibility or poor signal quality.
+The reliability of geolocation data is also influenced by the algorithms and techniques employed for data processing and fusion. Localization algorithms considering multiple geolocation data sources, such as GNSS, cellular networks, and Wi-Fi, can enhance reliability by mitigating individual technology limitations and improving accuracy through data fusion.
+Regular calibration and accuracy assessment are essential for ensuring the reliability of geolocation data. Calibration processes can account for systematic errors or biases, improving accuracy. Additionally, independent accuracy assessment methods, such as ground truth measurements or reference datasets, can be used to validate the reliability of geolocation data.
+Pollution tracking systems should implement data validation and quality control mechanisms to enhance reliability. These include outlier detection, consistency checks, and data filtering techniques to identify and discard erroneous or unreliable geolocation data points. Such measures help ensure that only accurate and reliable data are used for pollution tracking and analysis.
+4. Data Quality Formal Properties
+In the optic of retrieving pollution levels anywhere and anytime, predictive models based on artificial intelligence techniques can offer added value to the monitoring techniques based on sensor systems. To generate good models, some essential conditions must be taken into account.
+Firstly, comprehensive data collection is crucial, involving gathering high-quality and representative pollution measurements from various monitoring stations or sensors. This data should encompass relevant pollutant concentrations, meteorological conditions, and spatial-temporal information. 
+Secondly, preprocessing and data-cleaning techniques should be employed to remove outliers, correct inconsistencies, and address missing data. Additionally, appropriate statistical analysis methods and modeling techniques, such as regression, time series analysis, or machine learning algorithms, should be chosen based on the specific characteristics of the pollution data. Model validation and evaluation against independent datasets or reference data are necessary to assess the model's performance and reliability. 
+Lastly, continuous monitoring and updating of the model are vital to account for changes in pollutant sources, environmental conditions, or regulatory measures. By accomplishing these tasks, a proper modeling approach can provide valuable insights and aid in understanding and managing pollution effectively.
+
+
+<to be completed by Ariele>
+5. Parallelism to image analysis using convolution matrices
+Applying convolution to a grid of pollution values, such as a 2D spatial map representing pollution levels, can be a valuable tool for analyzing and processing pollution data. Here's how you can apply convolution to such a grid and what you can extract with each process:
+1. Smoothing and Noise Reduction:
+Convolution with a Gaussian Kernel: Convolving the pollution grid with a Gaussian kernel blurs the data, effectively applying a weighted averaging operation to each pixel. This process can help:
+* Extract general trends and patterns in pollution levels.This process aims to reveal the larger-scale trends and patterns that may exist in the data, helping researchers and analysts understand the pollution's behavior over time and space. Here's a more detailed explanation:
+   * General Trends: Trends refer to the overall direction or tendency of pollution levels as they change over time or across geographical areas. Extracting general trends involves identifying whether pollution levels are consistently increasing, decreasing, or remaining relatively stable. For example:
+      * Are pollution levels rising year by year in a particular region?
+      * Is there a seasonal pattern where pollution levels are higher during certain months?
+   * Patterns: Patterns in pollution data can manifest in various ways and may include repeating spatial or temporal features. Patterns can reveal information about the underlying causes of pollution or the influence of external factors. For example:
+      * Spatial Patterns: Are there specific geographical areas with consistently high or low pollution levels? These could indicate pollution sources or natural factors affecting pollution distribution.
+      * Temporal Patterns: Do pollution levels exhibit recurring patterns over time, such as daily, weekly, or yearly cycles? Identifying such patterns can help in understanding pollution dynamics.
+   * Visualization: Extracting general trends and patterns often involves creating visual representations of the data, such as line charts, heatmaps, or contour plots. Visualizations make it easier to grasp and interpret the data's behavior and can reveal insights that may not be immediately apparent from raw numbers.
+   * Statistical Analysis: Analyzing pollution data statistically can help quantify trends and patterns. Methods like regression analysis, time-series analysis, or spatial autocorrelation can provide quantitative measures of trends and patterns in pollution levels.
+   * Noise Reduction: Before extracting trends and patterns, it's common to apply noise reduction techniques to the data to filter out random or short-term fluctuations. This allows you to focus on more meaningful, long-term trends.
+* Remove high-frequency noise in the data, making it easier to identify long-term changes.
+* Create a smoother representation of pollution levels, which can be useful for visualization and trend analysis.
+
+
+2. Edge Detection:
+Edge detection is a fundamental image processing technique that plays a crucial role in analyzing spatial data, including pollution maps. It involves applying convolution with specialized kernels, such as the Sobel or Prewitt filters, to highlight areas of abrupt change or sharp transitions in pollution levels. Here's a more detailed explanation of this process:
+1. Identifying Boundaries between Different Pollution Zones or Regions:
+* Objective: One of the primary goals of edge detection in pollution data is to identify boundaries or edges between distinct pollution zones or regions. These regions could represent areas with different pollution sources, varying pollution control measures, or natural factors influencing pollution dispersion.
+* How It Works: The Sobel or Prewitt kernels emphasize areas where pixel intensity changes rapidly. In the context of pollution data, this translates to identifying areas where pollution levels shift abruptly from one range to another. These identified edges often correspond to the boundaries between different pollution sources or environmental conditions.
+* Application: By detecting these boundaries, analysts and researchers can pinpoint areas where pollution control measures may need adjustment, where further investigation is warranted, or where pollution mitigation efforts should be targeted.
+2. Detecting Gradients or Sharp Transitions in Pollution Intensity:
+* Objective: Edge detection also helps in detecting gradients or sharp changes in pollution intensity, even if they don't necessarily correspond to distinct boundaries between regions. This information is valuable for understanding the spatial variation in pollution levels.
+* How It Works: The convolution with Sobel or Prewitt kernels produces gradient maps that represent the rate of change in pollution intensity at each location. High gradient values indicate rapid changes, while low values indicate gradual changes or relatively uniform pollution levels.
+* Application: Identifying gradients in pollution intensity allows analysts to discern areas where pollution is increasing or decreasing sharply. This can be useful for assessing the potential impact on nearby communities, ecosystems, or sensitive areas. It also aids in tracking sources of pollution dispersion.
+3. Locating Areas Where Pollution Levels Change Significantly:
+* Objective: Edge detection helps locate areas where pollution levels change significantly, which could be of interest for further investigation or targeted interventions.
+* How It Works: When convolution with edge detection kernels is applied, regions with high-intensity gradients or pronounced edges are identified. These regions indicate locations where pollution undergoes substantial changes.
+* Application: These identified areas of significant change can be used for various purposes, such as monitoring pollution trends, identifying potential sources of pollution, assessing the effectiveness of pollution control measures, and guiding the placement of monitoring stations.
+* In summary, edge detection using kernels like Sobel or Prewitt is a valuable tool in the analysis of pollution data. It helps in highlighting spatial features such as boundaries between pollution zones, gradients in pollution intensity, and areas with significant pollution changes. This information assists environmental scientists, policymakers, and researchers in making informed decisions regarding pollution management, mitigation, and assessment of its impact on the environment and public health.
+
+
+3. Feature Extraction:
+Feature extraction is a critical step in analyzing pollution data, as it allows you to highlight specific characteristics or patterns of interest within the pollution grid. Custom convolution kernels play a crucial role in this process by enabling the extraction of targeted information from the data. Here's a detailed explanation of how this works:
+1. Emphasizing Areas with Rapid Changes in Pollution Levels:
+* Objective: One common goal of feature extraction is to identify areas where pollution levels change rapidly, as these may indicate pollution sources, sinks, or other dynamic environmental processes.
+* How It Works: To achieve this, custom convolution kernels can be designed to emphasize regions with a significant increase or decrease in pollution intensity. These custom kernels assign higher weights to pixel values that exhibit substantial changes compared to their neighbors.
+* Application: Identifying areas with rapid changes in pollution levels is valuable for pinpointing potential pollution sources or areas of concern. It can guide further investigations, regulatory actions, or targeted pollution control measures.
+2. Tailoring Kernels to Match Spatial Patterns of Interest:
+* Objective: Pollution data often exhibits specific spatial patterns or structures that are of interest to researchers. Custom kernels allow you to tailor the convolution operation to highlight these patterns.
+* How It Works: Custom kernels can be designed based on the expected spatial patterns. For example, if you are interested in identifying circular pollution patterns (e.g., from a circular pollution source), you can design a circular convolution kernel to match that shape. By convolving the grid with this custom kernel, you accentuate areas that match the spatial pattern you are looking for.
+* Application: This approach is valuable when you have prior knowledge of the expected pollution patterns in a particular area. It helps you extract relevant information related to these patterns, aiding in the identification of pollution sources or understanding specific pollution dispersion mechanisms.
+3. Visualization and Analysis:
+* Objective: Extracted features can be visualized and analyzed to gain insights into pollution patterns and behaviors.
+* How It Works: After applying custom convolution kernels, the resulting data can be visualized using various techniques such as heatmaps, contour plots, or 3D surface plots. Additionally, statistical analysis can be performed on the extracted features to quantify their significance or to identify correlations with other environmental factors.
+* Application: Visualization and analysis of extracted features help in better understanding the pollution data, supporting decision-making processes, and providing insights into the spatial distribution of pollution-related phenomena.
+In summary, feature extraction with custom convolution kernels allows you to tailor your analysis to specific aspects of pollution data that are of interest. This approach helps you highlight rapid changes in pollution levels, identify spatial patterns, and extract relevant information for your analysis. It is a versatile technique that can be customized to address various research questions and objectives related to pollution monitoring, assessment, and management.
+
+
+4. Pattern Identification:
+Template matching is a technique commonly used in image processing and spatial data analysis. It involves convolving a predefined template or pattern with a larger dataset, such as a pollution grid, to identify instances where the data matches the template. In the context of pollution data, this approach can be valuable for detecting specific pollution patterns or events and monitoring pollution sources or unusual occurrences. Here's a detailed explanation of how it works:
+1. Detecting Instances of Specific Pollution Patterns or Events:
+* Objective: Template matching aims to identify occurrences of predefined pollution patterns or events within the data. These patterns can represent various phenomena, such as specific pollution source emissions, unusual pollution spikes, or characteristic pollution signatures.
+* How It Works: To detect instances of these patterns, a predefined template is created, typically representing the expected spatial distribution of the pollution pattern of interest. Convolution is then applied between the template and the pollution grid. Areas of high convolution values indicate regions where the pollution data closely matches the template.
+* Application: This approach is useful for identifying and quantifying specific pollution events or patterns. It can be employed for monitoring pollution from known sources, tracking the movement of pollution plumes, or detecting unusual pollution events that deviate from the expected norms.
+2. Identifying Areas Where Pollution Matches Predefined Templates:
+* Objective: Template matching also helps identify geographical areas where the pollution closely matches predefined templates. This can be useful for pinpointing the spatial distribution of specific pollution types or sources.
+* How It Works: By convolving the template with the pollution grid, you highlight regions where the pollution data aligns with the template's spatial characteristics. These areas may indicate the presence of pollution sources or zones with pollution patterns matching the predefined template.
+* Application: Identifying areas where pollution matches predefined templates assists in locating pollution sources or understanding the spatial extent of specific pollution phenomena. It is beneficial for environmental monitoring, source attribution, and assessing the impact of pollution on nearby areas.
+3. Template Design and Customization:
+* Objective: The effectiveness of template matching depends on the design and customization of the templates to match the specific pollution patterns or events you are interested in.
+* How It Works: Templates are typically created based on domain knowledge, historical data, or known pollution characteristics. They can be customized to capture the size, shape, and intensity of the expected pollution patterns. Templates can be simple binary masks or more complex representations, depending on the complexity of the patterns.
+* Application: The design and customization of templates are crucial for the accuracy of the analysis. Well-designed templates increase the likelihood of detecting relevant pollution events or patterns and reduce the likelihood of false positives.
+In summary, convolution with template matching is a powerful technique for detecting specific pollution patterns or events within pollution data. It allows for the identification of instances where pollution closely matches predefined templates, aiding in the monitoring of pollution sources, unusual events, and the spatial distribution of pollution patterns. This approach relies on well-designed templates and can be applied to various pollution-related research and environmental monitoring applications.
+5. Segmentation:
+Thresholding and connected component analysis are common techniques used to process and segment pollution data. These methods are particularly useful for identifying separate pollution sources or hotspots and dividing the pollution grid into meaningful segments for further analysis. Here's a detailed explanation of how they work:
+1. Identifying Separate Pollution Sources or Hotspots:
+* Objective: The primary goal of thresholding and connected component analysis is to identify and isolate regions of the pollution grid that exhibit elevated pollution levels, often referred to as pollution sources or hotspots.
+* How It Works:
+   * Thresholding: After applying convolution or other preprocessing steps, a pollution threshold is set. Pixels or grid cells with pollution levels above this threshold are classified as polluted, while those below it are classified as non-polluted. This threshold can be chosen based on domain knowledge, regulatory standards, or statistical analysis.
+   * Connected Component Analysis: Once thresholding is applied, connected component analysis is used to group adjacent polluted pixels into distinct regions or clusters. Connected components represent areas where pollution levels are interconnected and above the threshold.
+* Application: This process is valuable for identifying pollution sources or hotspots, as it allows you to pinpoint areas where pollution exceeds a certain critical level. These identified regions can be further analyzed to understand their nature, causes, and potential impacts.
+2. Dividing the Pollution Grid into Meaningful Segments:
+* Objective: Thresholding and connected component analysis also serve to divide the pollution grid into meaningful segments or regions based on pollution intensity.
+* How It Works:
+   * Segmentation: Connected component analysis identifies and labels separate regions of connected polluted pixels. Each labeled region corresponds to a distinct segment of the pollution grid with elevated pollution levels.
+   * Spatial Units: These segmented regions can be used as spatial units for further analysis. For example, they can represent zones of interest for monitoring, regulatory compliance assessment, or environmental impact assessment.
+* Application: Dividing the pollution grid into meaningful segments simplifies the analysis of pollution data. It enables you to focus on specific areas, assess the impact of pollution in discrete regions, and make localized decisions regarding pollution control or mitigation measures.
+3. Visual Representation and Further Analysis:
+* Objective: The results of thresholding and connected component analysis can be visualized and used for subsequent analysis.
+* How It Works:
+   * Visualization: The segmented regions can be visualized on maps or plots, providing a clear representation of pollution sources and spatial patterns.
+   * Further Analysis: Once the pollution grid is divided into segments, you can perform more detailed analysis within each segment, such as assessing the severity of pollution, investigating potential pollution sources, or comparing pollution levels across segments.
+* Application: Visualization and further analysis facilitate decision-making and provide valuable insights into the spatial distribution of pollution within the study area.
+In summary, thresholding and connected component analysis are effective techniques for identifying pollution sources or hotspots and segmenting the pollution grid into meaningful regions. These methods help in pinpointing areas of concern, simplifying data analysis, and making informed decisions related to pollution monitoring, management, and environmental assessment.
+6. Anomaly Detection:
+Statistical analysis applied to pollution data, with the aid of convolution, is a powerful technique for detecting anomalies, identifying outliers, and assessing deviations from expected pollution levels. This approach leverages statistical models and historical data to gain insights into the behavior of pollution levels. Here's a detailed explanation of how it works and its applications:
+1. Detecting Anomalies or Outliers in Pollution Levels:
+* Objective: The primary goal of convolution-based statistical analysis is to identify unusual or unexpected variations in pollution levels, often referred to as anomalies or outliers.
+* How It Works:
+   * Statistical Models: Statistical models, such as mean, median, or standard deviation, are applied to the convolved pollution data. These models establish a baseline or expected behavior of pollution levels.
+   * Anomaly Detection: Anomalies or outliers are identified by comparing the actual convolved data with the statistical model. Data points that significantly deviate from the expected values are flagged as anomalies.
+* Application: Detecting anomalies is essential for early warning systems and pollution monitoring. Anomalies may indicate pollution events, equipment malfunctions, or other abnormal conditions that require immediate attention.
+2. Identifying Regions with Significant Deviations from Expected Values:
+* Objective: Convolution-based statistical analysis can identify regions within the pollution grid where pollution levels deviate significantly from what is expected based on historical data or a predefined model.
+* How It Works:
+   * Comparative Analysis: The convolved pollution data is compared to historical data or a predefined statistical model. This comparison highlights areas where current pollution levels differ significantly from the expected values.
+   * Spatial Mapping: Identified regions of significant deviation can be spatially mapped to visualize the extent of the deviations across the study area.
+* Application: Identifying regions with significant deviations is crucial for understanding changes in pollution patterns over time. It can help in assessing the effectiveness of pollution control measures, tracking long-term trends, and pinpointing areas where pollution mitigation efforts may be needed.
+3. Model Selection and Calibration:
+* Objective: The effectiveness of convolution-based statistical analysis depends on selecting appropriate statistical models and calibrating them to the specific pollution data.
+* How It Works:
+   * Model Selection: Different statistical models may be chosen based on the characteristics of the pollution data and the objectives of the analysis. For example, if pollution levels exhibit strong seasonal patterns, time series models may be suitable.
+   * Model Calibration: Statistical models are calibrated using historical data to establish a baseline for expected pollution levels. Model parameters may be adjusted to account for changes in environmental conditions or pollution sources.
+* Application: Model selection and calibration ensure that the statistical analysis is tailored to the unique features of the pollution data, improving its accuracy and reliability.
+In summary, convolution-based statistical analysis is a valuable tool for assessing pollution data. It enables the detection of anomalies, identification of outliers, and the assessment of deviations from expected pollution levels. This approach aids in early warning systems, long-term trend analysis, and decision-making for pollution management and control. It relies on statistical models and historical data to provide valuable insights into pollution behavior.
+7. Predictive Modeling:
+CNNs are deep learning models specifically designed for tasks involving grid-like data, such as images and spatial data, making them highly suitable for analyzing pollution grids. Training CNNs on a large dataset of pollution grids offers several benefits and capabilities:
+1. Learning Complex Spatial Patterns in Pollution Data:
+* Objective: CNNs excel at learning complex spatial patterns and hierarchies within data. In the context of pollution data, this means that CNNs can identify intricate relationships between pollution levels at different locations in the grid.
+* How It Works:
+   * Convolutional Layers: CNNs use convolutional layers that apply convolutional operations to local regions of the pollution grid. These layers learn spatial filters to detect features at different scales.
+   * Hierarchical Feature Extraction: As data flows through the network, higher-level features are extracted through additional layers, allowing the model to capture abstract representations of pollution patterns.
+* Application: CNNs can automatically discover and represent complex spatial patterns in pollution data, which may not be apparent through traditional analysis methods. This capability is essential for understanding the intricate nature of pollution sources, dispersion, and impacts.
+2. Making Predictions Related to Pollution Impacts:
+* Objective: CNNs can be used to predict various outcomes related to pollution impacts, including effects on health, the environment, or other factors.
+* How It Works:
+   * Regression Tasks: CNNs can be trained for regression tasks, where they predict continuous values, such as pollutant concentrations or pollutant dispersion over time.
+   * Classification Tasks: CNNs can also be used for classification tasks, where they predict discrete categories or labels, such as pollution severity levels or pollution event detection.
+* Application: By training CNNs on a dataset that includes both pollution grid data and associated outcomes (e.g., health impact data), you can build predictive models that estimate the effects of pollution on various factors. These models can inform public health policies, environmental regulations, and mitigation strategies.
+3. Performing Regression or Classification Tasks Based on Spatial Features:
+* Objective: CNNs can extract spatial features from pollution grids and use these features to perform regression or classification tasks.
+* How It Works:
+   * Spatial Feature Extraction: Convolutional layers in CNNs learn spatial features from the pollution grid. These features capture important spatial characteristics.
+   * Output Layers: The extracted features are then fed into one or more fully connected layers that produce predictions for regression or classification tasks.
+* Application: CNNs can be used for tasks such as predicting pollutant concentrations at specific locations, classifying pollution sources, or identifying pollution events based on the spatial features learned from the grid data.
+In summary, CNNs offer a powerful approach to analyze pollution data by leveraging their ability to learn complex spatial patterns and make predictions related to pollution impacts. They can be used for a wide range of tasks, including understanding pollution sources, predicting environmental and health outcomes, and performing spatial analysis. CNNs are particularly beneficial when working with large-scale pollution datasets that require the extraction of intricate spatial features for decision-making and policy development.
+8. Temporal Analysis:
+3D convolution is a valuable technique when you have a time series of pollution grids, allowing you to analyze spatiotemporal patterns in the data. This approach extends the capabilities of traditional convolution to incorporate the time dimension, enabling you to gain insights into how pollution levels change over time, detect recurring patterns, and understand the relationship between spatial and temporal factors in pollution. Here's a detailed explanation of how it works and its applications:
+1. Identifying How Pollution Levels Evolve Over Time:
+* Objective: 3D convolution enables you to study the temporal evolution of pollution levels. You can observe how pollution concentrations change at each spatial location across multiple time points.
+* How It Works:
+   * 3D Data Representation: Pollution data is represented as a 3D grid, with dimensions corresponding to spatial coordinates (e.g., latitude and longitude) and time. Each grid cell contains pollution measurements at a specific location and time.
+   * 3D Convolution: Convolutional operations are applied across all three dimensions (spatial and temporal) of the data. This means that convolution filters are used to capture patterns and trends that involve both spatial and temporal components.
+* Application: 3D convolution allows you to visualize and analyze how pollution levels change over time at different locations. This is essential for understanding pollution dynamics, assessing long-term trends, and identifying areas prone to pollution events.
+2. Detecting Recurring Patterns or Trends in Pollution Data:
+* Objective: By applying 3D convolution, you can detect recurring spatiotemporal patterns or trends in pollution data. These patterns may repeat over certain time intervals.
+* How It Works:
+   * Pattern Recognition: 3D convolution filters can capture patterns that manifest as consistent features in both space and time. These patterns may include recurring pollution events, seasonal variations, or other cyclic behaviors.
+   * Temporal Filtering: Convolutional layers in the network learn to recognize how specific patterns evolve over time, allowing for the detection of recurring phenomena.
+* Application: Identifying recurring patterns or trends in pollution data helps in forecasting pollution events, assessing the impact of seasonal factors, and understanding the underlying causes of pollution variations.
+3. Understanding the Relationship Between Spatial and Temporal Factors:
+* Objective: 3D convolution provides insights into the intricate relationship between spatial and temporal factors in pollution data. It helps you discern how pollution levels at different locations are influenced by changing environmental conditions over time.
+* How It Works:
+   * Feature Extraction: 3D convolution extracts spatial-temporal features that capture the joint influence of location and time on pollution levels.
+   * Correlation Analysis: The network can identify how pollution levels in one location are correlated with those in nearby locations and how these correlations change over time.
+* Application: Understanding the interplay between spatial and temporal factors is crucial for pollution source attribution, environmental modeling, and policy development. It can inform decisions on pollution control and mitigation strategies.
+In summary, 3D convolution is a powerful tool for analyzing spatiotemporal patterns in pollution data. It allows you to investigate how pollution levels evolve over time, detect recurring patterns, and explore the complex relationship between spatial and temporal factors. This approach is essential for gaining a comprehensive understanding of pollution dynamics, making informed decisions, and developing effective pollution management strategies.
+9. Heatmap Generation:
+Kernel Density Estimation (KDE) is a technique used to estimate the probability density function of a continuous random variable. In the context of pollution data analysis, KDE can be implemented through convolution to create heatmaps that highlight areas of high pollution concentration, provide visual representations of pollution hotspots or density gradients, and facilitate the visualization of pollution patterns across the spatial domain. Here's a detailed explanation of how it works and its applications:
+1. Highlighting Areas of High Pollution Concentration:
+* Objective: KDE with convolution aims to highlight regions on the pollution grid where pollution concentrations are particularly high.
+* How It Works:
+   * Kernel Function: In KDE, a kernel function (e.g., Gaussian) is placed at each data point on the pollution grid.
+   * Convolution Operation: The convolution operation is applied to the grid with these kernel functions, effectively smoothing and spreading the contribution of each data point over its neighboring regions.
+   * Summation: The results of the convolution operation are summed up to create a density estimate across the entire grid.
+* Application: The resulting heatmap highlights areas where pollution concentrations are elevated, providing a clear visualization of pollution hotspots. This information is valuable for identifying areas of concern and targeting pollution monitoring or control efforts.
+2. Providing Visual Representation of Pollution Hotspots or Density Gradients:
+* Objective: KDE heatmaps created through convolution offer a visual representation of pollution hotspots and density gradients.
+* How It Works:
+   * Color Mapping: Heatmaps use color mapping to represent the intensity of pollution density. High-density areas are typically displayed in warmer colors (e.g., red or orange), while low-density regions appear in cooler colors (e.g., blue or green).
+   * Gradient Visualization: The transitions between colors on the heatmap effectively show the density gradients, allowing you to see how pollution levels change across space.
+* Application: Visual representations of pollution hotspots and density gradients help stakeholders, policymakers, and researchers quickly grasp the spatial distribution of pollution. This aids in decision-making, identifying trends, and planning interventions.
+3. Facilitating the Visualization of Pollution Patterns Across the Spatial Domain:
+* Objective: KDE heatmaps created through convolution provide an overall view of pollution patterns across the entire spatial domain.
+* How It Works:
+   * Spatial Domain Coverage: The KDE heatmap covers the entire study area, making it possible to visualize pollution patterns at both large and fine scales.
+   * Contextual Understanding: The heatmap offers context by showing not only areas with high pollution concentrations but also areas with moderate or low concentrations, helping to understand the spatial context of pollution distribution.
+* Application: The ability to visualize pollution patterns across the spatial domain is critical for gaining insights into the extent and distribution of pollution, identifying trends, and informing environmental management strategies.
+In summary, Kernel Density Estimation (KDE) with convolution is a valuable technique for creating heatmaps that highlight pollution concentration, density gradients, and overall pollution patterns across the spatial domain. These heatmaps offer visual insights into pollution data, aiding in decision-making, environmental monitoring, and the identification of areas where pollution control measures may be needed.
+10. Change Detection:
+Convolution with historical data is a technique used to analyze changes in pollution levels over time and to detect anomalies or events that deviate from historical trends. This approach leverages convolution to compare current pollution grid data with historical records, enabling monitoring and analysis of how pollution patterns evolve. Here's a detailed explanation of how it works and its applications:
+1. Detecting Changes in Pollution Levels Over Time:
+* Objective: Convolution with historical data allows you to detect changes in pollution levels over time, helping you identify trends, whether they are increasing, decreasing, or remaining relatively stable.
+* How It Works:
+   * Current and Historical Data: You have both the current pollution grid and historical pollution data for multiple time points.
+   * Convolution Operation: The convolution operation is applied between the current data and historical data. This operation effectively measures the similarity or dissimilarity between the current and historical pollution patterns.
+* Application: Detecting changes in pollution levels is essential for assessing long-term trends, understanding the effectiveness of pollution control measures, and identifying areas where pollution is increasing or decreasing significantly.
+2. Identifying Anomalies or Events That Differ from Historical Trends:
+* Objective: Convolution with historical data allows you to identify anomalies or events in the current pollution data that deviate from the expected historical trends.
+* How It Works:
+   * Statistical Comparison: The convolution operation provides a quantitative measure of the similarity between current and historical data at each spatial location.
+   * Thresholding: Anomalies or events are identified by applying a threshold to the convolution results. Locations where the convolution values exceed the threshold are considered anomalies.
+* Application: Identifying anomalies or unusual events is crucial for early warning systems and pollution event detection. It helps in promptly addressing unexpected pollution spikes, incidents, or changes in pollution sources.
+3. Monitoring and Analyzing How Pollution Patterns Evolve:
+* Objective: Convolution with historical data facilitates the monitoring and analysis of how pollution patterns evolve over time.
+* How It Works:
+   * Time Series Analysis: By applying convolution at different time points, you create a time series of convolution results, capturing the evolution of pollution patterns.
+   * Visualization and Trend Analysis: These time series can be visualized and analyzed to identify long-term trends, seasonal variations, or recurring patterns in pollution.
+* Application: Monitoring how pollution patterns evolve is valuable for environmental monitoring, assessing the impact of external factors (e.g., climate change), and informing decision-making for pollution control and management strategies.
+In summary, convolution with historical data is a powerful technique for analyzing changes in pollution levels over time, detecting anomalies or events, and monitoring the evolution of pollution patterns. This approach provides valuable insights into pollution dynamics and is essential for long-term trend analysis, event detection, and decision-making in environmental monitoring and assessment.
+
+
+Each of these convolution-based processes serves a specific purpose in analyzing pollution data, extracting relevant information, and gaining insights into pollution level's spatial distribution and temporal dynamics. The choice of which process to use depends on your research objectives and the characteristics of the pollution dataset you are working with.
+
+
+Spatial Smoothing with Convolution Matrices:
+Convolution matrices are often used for spatial smoothing in image processing and spatial data analysis. Smoothing with convolution matrices involves applying a convolution operation to a spatial grid or dataset, which effectively averages or blurs values across neighboring pixels. This process can be considered a form of spatial extrapolation because it estimates values for unobserved locations based on the values of nearby observed locations. Here's how it works:
+1. Kernel Design: Start by designing a convolution kernel or matrix. The kernel defines the weights used for averaging neighboring pixel values. The size and shape of the kernel determine the extent of smoothing or extrapolation.
+2. Convolution Operation: Apply the convolution operation to the spatial data grid using the designed kernel. This operation involves sliding the kernel over each pixel in the grid, multiplying the pixel values by the corresponding kernel weights, and summing the results.
+3. Smoothing Effect: The result of the convolution operation is a smoothed version of the original data grid. The values at each pixel in the smoothed grid are a weighted average of the values in its neighborhood, with the weights specified by the kernel.
+4. Spatial Extrapolation: Spatial smoothing using convolution effectively extrapolates values for unobserved locations by taking into account the information from neighboring observed locations. It provides a smoother representation of the data, reducing noise and emphasizing larger-scale spatial trends.
+5. Adjustable Parameters: The degree of smoothing can be adjusted by changing the size and shape of the convolution kernel. Larger kernels lead to more extensive smoothing, while smaller kernels result in finer details being preserved.
+6. Visualization: The smoothed spatial data can be visualized to observe the spatial trends and patterns in the data more clearly.
+Spatial smoothing with convolution matrices is commonly used in various applications, such as image denoising, feature enhancement, and reducing high-frequency noise. It provides a way to estimate values for unobserved spatial locations based on the observed data, making it a form of spatial extrapolation through smoothing.
+Limitations of Convolution Matrices for Temporal Extrapolation:
+Convolution matrices are highly effective for spatial data processing and analysis, particularly in tasks like image processing, spatial filtering, and feature extraction. However, they are not well-suited for temporal extrapolation, which involves predicting values at future or past time points based on observed historical data. Here are several key reasons why convolution matrices are not ideal for temporal extrapolation:
+1. Lack of Temporal Information: Convolution matrices are primarily designed for processing spatial data, and they do not inherently capture temporal dynamics. They operate on a static spatial neighborhood without considering the chronological order of data points. In temporal extrapolation, understanding how data changes over time is crucial, and convolution matrices do not inherently provide this capability.
+2. Fixed Spatial Context: Convolution matrices have a fixed spatial context defined by the kernel size and shape. They consider neighboring data points in a local spatial window but do not account for the changing temporal relationships between data points at different time steps. Temporal extrapolation requires the consideration of past and future temporal dependencies, which convolution matrices do not naturally handle.
+3. Limited Temporal Modeling: Convolution matrices are not designed to model complex temporal patterns, trends, or seasonality in data. Temporal extrapolation often involves capturing and predicting temporal dynamics, which may require time series analysis techniques or recurrent neural networks (RNNs) that can model temporal dependencies.
+4. Inadequate for Irregular Time Intervals: Temporal data often involves irregular time intervals where observations are not evenly spaced. Convolution matrices are designed for regular grids or datasets and may not handle irregular temporal data efficiently. Techniques like interpolation or time series analysis are more suitable for handling irregular time intervals.
+5. Lack of Memory: Convolution matrices do not have memory of past observations. Temporal extrapolation often requires models that can remember and incorporate past data points to make informed predictions about future values. This capability is crucial in understanding temporal trends.
+6. Specific Temporal Models Needed: For accurate temporal extrapolation, specific temporal modeling techniques are often required. These can include autoregressive models, moving averages, exponential smoothing, or machine learning models designed for time series forecasting.
+In summary, while convolution matrices are powerful tools for spatial data processing and feature extraction, they are not well-suited for temporal extrapolation. Effective temporal extrapolation requires techniques that can model temporal dynamics, capture historical patterns, and make predictions based on chronological data. Temporal data analysis often calls for specialized methods and models that are explicitly designed to address the challenges and characteristics of time-dependent data.
+
+
+
+
+ https://documents.lucid.app/documents/709b7356-fa28-4668-b882-9457c1aabb84/pages/0_0?a=333&x=-606&y=-2106&w=2899&h=1541&store=1&accept=image%2F*&auth=LCA%207d811667bd00a87c251e5a71269b5af2f6d0ac778e3f487e4ca0858ac0d3af77-ts%3D1695716215 
+
+6. The proposed approach
+This study addresses the trade-off between low-cost mobile sensors and sophisticated, fixed, expensive sensors. Advanced studies show that a sophisticated, static, expensive sensor can be miniaturized into a mobile version with the same quality output. We are not addressing this case: generally speaking, in mobile crowd-sensing environments mobile sensors are low-cost and low-quality.
+It is self-evident that both fixed and mobile devices have advantages and problems that permit users to select which would suit their needs the most. It is commonly understood that the least expensive sensor is often less reliable. The mobility of the mobile system enables it to cover all areas of the zone, while the accuracy of the fixed systems allows for verification and calibration of the entire system.
+Increasing the number of mobile independent sensors (sensors that move independently from one another)  in a mobile surveying system can significantly improve the probability of reaching every corner of the surveyed zone. This is particularly relevant when considering the probabilistic aspect of random displacement. When only a few sensors are employed, there is a higher likelihood of encountering unobserved areas. Increasing the number of sensors diminishes the chance of the occurrence of gaps in the surveyed zone. This approach minimizes the risk of missing critical information and ensures a more reliable and thorough survey of the entire zone.
+
+
+In a rapidly evolving technological landscape, ensuring the coherence, accuracy, and accessibility of data is paramount. This chapter details an architecture designed to seamlessly integrate data from mobile sensors, analyze it, and present it comprehensively to diverse stakeholders.
+   
+   9. Connected Database Systems architecture
+In this paragraph, we present the overall architecture of the system, the three databases that support it, the processing units, and the data flow between these databases. There are three databases: 
+(i) the Sensor & Component Registry and Repository
+(ii) the Raw Data Samples Repository
+ (iii) the Verified Data Samples Repository
+A high-level description of the overall architecture of the system is presented in the following figure
+<schema of the overall architecture to be provided>
+The Sensor & Component Registry and Repository 
+This database contains the Registry of sensor types and component types and the repository of the deployed sensor.
+The Registry allows users to declare sensor and component types. 
+Each component type is declared with a unique ID to the system, and possesses properties such as the type of measurement, the measurement unit, precision, resolution, range, and protocols needed to be applied for the preprocessing and derived from the manufacturer’s datasheet. 
+The type of measurement, the unit it uses, the precision, the resolution, the range, and the protocols needed to be applied for the preprocessing and derived from the manufacturer’s datasheet.
+
+
+The hardware description details the sensor's capabilities, specifications, and the types of data it is designed to capture, such as temperature, humidity, or particulate matter levels.  [h]
+Each sensor type is also declared with a unique ID to the system. It contains the references to the component types that are part of the sensor
+The corrective protocols are directly linked to the sensor’s firmware. They are detailed in the section V.2 
+Moreover, each sensor type includes the following properties:
+<sensor type properties to be provided>
+The Sensor Repository memorizes all the sensor instances users declare in the MCE deployment. Each sensor instance has a unique ID that can be found in the firmware and is broadcasted with any communication. Every sensor instance contains  properties such as the reference to the sensor type, the overall estimated quality of the sensor output over it usage, and, if the sensor is fixed and does not broadcast its location, the coordinates in the three dimensions.
+
+
+The Raw Data Samples Repository
+The Raw Data Samples Repository receives the flow of raw data samples generated by the deployed sensor instances. This database acts as a buffer of raw data samples for the Consistency Processing Unit that stores the processed sensor data samples in the Verified Data Samples Repository.
+The Consistency Processing Unit is a software module that retrieves data from the Raw Data Samples Repository in the streaming order. Each data sample contains the I.D. of the sensor, which allows identifying  the sensor type on the Registry. The module compiles the overall logic and processes the data sample based on the specifications of the sensor type. Once all the pre-processing is completed, only if the data is validated it is stored in the Verified Data Samples Repository.
+The Verified Data Samples Repository
+As mentioned above, the Verified Data Samples Repository receives the flow of sensor data samples processed and validated by the Consistency Processing Unit. 
+
+
+ https://documents.lucid.app/documents/0a8811d0-c0eb-41ea-a2ab-a5dbc0d9cb77/pages/0_0?a=5625&x=799&y=343&w=1761&h=793&store=1&accept=image%2F*&auth=LCA%2073aeb8650b38cce6e153a5704b13f93d8beafe73fdc3bd2a2a37ef1d265f9f21-ts%3D1695712083 
+
+Fig. 1 E.R.D representation of Database structure
+   10.  Describing the Sensor Type and Operating Logic:
+Data samples must be processed and validated before integrating the Verified Data Samples Repository. The modus operandi of the validation process is provided by the description of the sensor type in the Sensor & Component Registry and Repository.
+When introducing a new sensor type to the platform, it is imperative to provide a thorough description encompassing the sensor's components and the sensor’s operational logic. The sensor description should detail its capabilities, specifications, and the types of data it is designed to capture, such as temperature, humidity, or particulate matter levels. Moreover, the sensor description should contain the operational logic or protocol, which drives the validation process of the data samples by the Processing Unit. The operational logic could include instructions for data filtering, normalization procedures, error-handling mechanisms, and any other steps vital for maintaining data quality and consistency for further analysis. 
+The operational logic is organized into two tiers: component-level and sensor-level tiers. 
+<component level operational logic to be provided>
+The sensor-level logic, on the other hand, reports any internal data processing conducted by the sensor itself, such as data corrections, transformations, or calibrations. By integrating this internal logic, the platform can better understand the state of the raw data upon arrival, ensuring that any additional processing aligns with the sensor's native capabilities and limitations. This dual-tier logic system streamlines the integration of new sensors, making the process more efficient while retaining a focus on data integrity and accuracy.
+   * Unit conversion example
+Here's an illustrative example of how our model can accommodate a unit conversion operation, specifically, the conversion of temperature readings from Fahrenheit to Celsius. The chosen formalism is JSON:
+{
+  "SensorType": "TemperatureSensor",
+  "Components": {
+    "TemperatureComponent": {
+      "Unit": "Fahrenheit",
+      "Accuracy": "±1°F"
+    }
+  },
+  "OverallSensorLogic": {
+    "InternalProcessing": "False",
+    "Operations": [
+      {
+        "Type": "UnitConversion",
+        "Parameters": {
+          "ConversionFormula": "(Temperature°F - 32) * 5/9",
+          "NewUnit": "Celsius"
+        }
+      }
+    ]
+  }
+}
+
+
+In this example, a temperature sensor, initially configured to measure temperature in Fahrenheit send is measurements as raw data samples to the Raw Data Samples Repository. For consistency, the platform requires a unit conversion operation to translate the readings to Celsius and store the data in the Final Table[i][j]. The "UnitConversion" operation is defined with a "ConversionFormula" parameter, which the system can interpret and apply autonomously to each reading. The "NewUnit" parameter indicates the unit of measure post-conversion, ensuring clarity and consistency in the processed data.
+The defined logic within the model is archivable and reusable, providing an efficient mechanism to handle sensor types with similar components or operations. Each component logic is stored in a registry, enabling seamless reuse in defining new sensor types. The model also acknowledges any internal processing, like correction and additional steps undertaken by the sensor before data transmission. Encapsulating such processing logic within the model facilitates automated, accurate, and efficient data preprocessing.
+
+
+Example 2
+
+
+Sensor data accuracy is paramount for reliable monitoring and analytics in various domains. Especially in scenarios where pressure measurements are susceptible to temperature variations, a robust method for data validation and transformation is indispensable. This chapter delineates a logic model aimed at addressing this exigency.
+Methodology:
+Again, the logic model is articulated in JSON format, embodying distinct validation, transformation, and overarching sensor logic segments. This model is tailored for a sensor type, "PressureTemperatureSensor, " which encapsulates temperature and pressure sensing components.
+
+
+{
+    "SensorType": "PressureTemperatureSensor",
+    "Logic": {
+        "Components": {
+            "Temperature"[k]: {
+                "Validation": {
+                    "MinValue": -10,
+                    "MaxValue": 50
+                },
+                "Transformation": {
+                    "ScaleFactor": 1,
+                    "Offset": 0
+                }
+            },
+            "Pressure": {
+                "Validation": {
+                    "DependsOn": "Temperature",
+                    "ValidIf": "Temperature within range"
+                },
+                "Transformation": {
+                    "Operation": "Conditional",
+                    "Condition": [
+                        {
+                            "Range": "-10 <= Temperature && Temperature <= 0",
+                            "Function": "Pressure * 1.05"
+                        },
+                        {
+                            "Range": "0 < Temperature && Temperature <= 50",
+                            "Function": "Pressure * 1.02"
+                        },
+                        {
+                            "Range": "Temperature > 50 || Temperature < -10",
+                            "Action": "Cancel"
+                        }
+                    ]
+                }
+            }
+        },
+        "SensorLogic": {
+            "Processing[l]": {
+                "Step1": "Validate Temperature",
+                "Step2": "If Temperature validation succeeded, Validate and potentially Transform Pressure based on the temperature range",
+                "Step3": "If Temperature validation failed or Temperature outside designated range, Cancel Pressure measurement"[m]
+            }
+        }
+    },
+    "Operations": {
+        "Conditional": {
+            "Description": "Conditional operation based on Temperature range to either transform or cancel the Pressure measurement."
+        },
+        "Cancel": {
+            "Description": "Cancel the Pressure measurement if Temperature is outside the specified range."
+        }
+    }
+}
+
+
+The temperature data is initially validated against a predefined range of -10 to 50 degrees. The pressure data undergoes conditional validation and potentially a transformation or cancellation based on the prevailing temperature conditions.
+The transformation block within the Pressure component delineates a conditional operation predicated on the temperature range: if the temperature lies between -10 and 0 degrees, a function is applied to increase the pressure reading by 5%; if the temperature resides within 0 to 50 degrees, a modest function increasing the pressure reading by 2% is applied; otherwise, if the temperature is beyond the defined range, the pressure measurement is canceled.
+
+
+ dual-tier logic (sensor-level and component-level  system streamlines the integration of new sensors, making the process more efficient while retaining a focus on data integrity and accuracy. The model facilitates automated, precise, and efficient data preprocessing while ensuring consistency and adherence to analytical objectives. The model also provides mechanisms for reusing component-level logic and acknowledging any internal processing undertaken by the sensor before data transmission. Thus, the proposed model can be instrumental in accurate and reliable data processing, enabling effective and efficient monitoring and management of the environment
+   11. Sending Codes: A Detailed Overview
+An integral component of this data management process is the data transmission mechanism between the sensors and the platform. Here is the protocol that the Canarin Nano Sensor [reference lacking]uses.
+Inserting New Values:
+Format for submission: MSG: {1 , NODE_ID, PROJECT_ID, TIMESTAMP, [(VALUE_ID: VALUE_NUM), (VALUE_ID: “VALUE_STRING”)]} Example: {1, 123456789, 42, 1544858269, 1:0, 2:0, 3:0, ...}
+Return codes after submission:
+0: Error.
+1: Message received correctly.
+2: Setting flag-related issues.
+3: altitude
+4: temperature (°C)
+5: humidity (%)
+6: air pressure (hPa)
+7: PM25 (𝛍g/m3)
+8: PM10 (𝛍g/m3)
+9: PM01 (𝛍g/m3)[n]
+
+
+40: gas (high-linearity and high-accuracy gas)(kohms)
+41: TVOC (ppb)
+42: CO2e (ppm)
+
+
+45: version
+46: speed
+47: age,
+48:gotGPS
+
+
+The sensors can be parametrized to include identifiers like Project_ID[o] to classify further and organize data, ensuring a coherent data organization strategy.
+Value Identification:
+Each piece of data sample, from latitude and longitude to specific pollutant values, is associated with a unique identifier for consistent categorization.
+Return Codes:
+Upon receiving data, the system sends a confirmation message. For instance, for an error: {0, 123456789, 42, 1544858269, "Error message."} or for acknowledgment: {1, 123456789, 42, 1544858269}
+Configuration Values:
+Parameters like data transmission interval, GPS settings, and other specific configurations ensure the sensor operates optimally while sending data.
+
+
+```
+//STORAGE VARIABLES
+int interval = 1; //0
+int isCloudMode = 0; //1
+int pmSamplingTime = 5000;//2
+int gpsON = 1; //3
+int cell_location = 2; //4
+int resetModem = 0; //5
+int doSleep = 0; //6
+int batterySleepTime = 60*30; //7 30 min
+int remoteControl = 0; //8 UNUSED on Nano
+int ntpTime = 1; //9
+int exactMin = 1; //10
+int cloud_time_timeout = 120; //11 //60 sec
+int erase_fs = 0; //12
+int resetGPS = 0; //13
+int updateGPSRate = 0; //14
+int restoreVars = 0; //15
+int cell_location_timeout = 15; //16 - 15 min
+```
+
+
+   12. AI Integration: The Analytical Powerhouse
+Automated Operations: AI models are responsible for various operations like data pre-processing, categorization, and anomaly detection.
+Continuous Quality Analysis: AI's capacity to learn and adapt makes it an ideal candidate for analyzing data quality, spotting trends, and making predictions.
+Coverage Analysis: AI-driven tools are adept at analyzing spatial and temporal data to assess the coverage provided by mobile sensors, adapting strategies accordingly.
+   13. Sensor Subscription and Data Entry Mechanism
+Protocol Adherence:
+Ensuring Coherence: Sensors must adhere to a predefined communication protocol before integrating[p]. This ensures uniformity in data and simplifies processing.
+Dynamic Integration: While a structure is maintained, the protocol allows for future pollutant additions, ensuring compatibility.
+Sensor Recognition:
+Model Description: Every new sensor type requires a comprehensive description. This aids AI in pre-processing, ensuring data accuracy from the source.
+Reusability: A unique feature of this system is its ability to recognize commonalities among sensortypes that contains components of the same component type. If multiple sensors utilize the same components, the system avoids redundant descriptions, optimizing storage and processing.
+ID Allocation: Recognized sensors are assigned a unique ID, streamlining future data transmission and treatment.
+
+
+  https://documents.lucid.app/documents/b152dc89-cae5-4ef7-abb5-df44fcbf5870/pages/0_0?a=1453&x=655&y=1041&w=536&h=1111&store=1&accept=image%2F*&auth=LCA%20442f7701db0d4ef583177e07f49c5bfaab62c038c93e318f38cb7fe3fac594a5-ts%3D1695626937 
+Fig. Sensor Subscription mechanism[q]
+
+
+
+
+
+
+Data Entry and Pre-processing:
+Instantaneous Analysis: As soon as new data enters the Raw Data Sample Repository, AI models spring into action; leveraging the sensor ID, they determine the necessary operations, ensuring the data is ready for entry into the Validated Data Sample Repository.
+Error Handling: The pre-processing phase also encompasses error detection. Any discrepancies or anomalies are flagged for review, ensuring the primary database remains untainted by potentially incorrect data.
+  https://documents.lucid.app/documents/b152dc89-cae5-4ef7-abb5-df44fcbf5870/pages/0_0?a=1453&x=1213&y=1079&w=297&h=1334&store=1&accept=image%2F*&auth=LCA%202b29a6b4153ee1e6cc0cad586299f958c4264c376bc5eb15ea814aaaa5ddbdd5-ts%3D1695626937 
+Fig. 4 Data entry mechanism[r]
+
+
+
+
+   14. Future developments-Proofing the Architecture
+Scalability: The architecture will be redesigned to handle increasing sensors and data samples volume, ensuring sustainability.
+Flexibility: Its significant strength is the system's ability to accommodate new pollutants and sensor types without a complete overhaul.
+Data Privacy & Security: As technology advances, so do potential threats. Regular updates and security audits are in place to protect sensitive data.
+   15. Conclusion 
+The detailed architecture proposed bridges the gap between diverse mobile sensor data and comprehensive, accessible insights. The architecture ensures accuracy, scalability, and security through a two-tiered database system, AI integration, and robust data handling mechanisms, laying the foundation for effective air quality monitoring in the modern age.
+
+
+7. Evaluating Mobile Sensor Completeness
+< short description of the polluscope project>
+One of the main problems that the Polluscope project must take into account is the reliability of the chain of acquisition and processing of spatio-temporal data. Mobile sensors and micro-detection units are well known to be less robust and more sensitive to various events including points-of-failure. By the time issues are fixed, the sensors may lose significant chunks of data.
+
+
+A critical problem is the completeness of the data samples. This paragraph addresses the challenges and methodologies associated with evaluating different facets of completeness of the data sample produced by these sensors.
+<reference to the paper or the project>
+   16. Completeness Analysis 
+We introduce and define three completeness facets:
+* Sensor completeness
+* Spatial completeness
+* Temporal completeness
+
+
+1. Sensor Completeness (SenC):
+Sensor completeness is related to the completeness of the data sample captured and sent by an individual sensor during its usage in a specified time period, independently from the quality of the data samples. Formally, SenC is defined as:.
+
+Where is the actual number of measurements and
+is the required number of measurements from sensor Si during its usage in the time period (The required number of measurements is the sampling rate of the sensor times the duration of usage).
+
+
+2. Spatial Completeness (SC):
+Spatial completeness indicates how sufficient and comprehensive the current measurements are for a particular area.. This notion is similar to the concept of data skewness. [Belussi, Migliorini, & Eldawy, 2018]
+Several approaches exist for determining the ideal required number of measurements for a specific area. For instance, one approach could be 
+1. to divide the designated area into equal-sized grid cells and 
+2. to define a number of required measurements in each grid cell.
+3. To evaluate the spatial completeness of each grid cell (see below)
+to aggregate the evaluations of the grid cells to obtain the spatial completeness of the area of study. 
+The spatial completeness (SC) of a grid cell is defined as:
+
+
+
+​
+Where and are respectively the actual and required number of measurements in a grid cell .
+Overall Spatial Completeness: Calculated either as the cumulative average of all cells' spatial completeness or based on a threshold value.
+
+
+3. Temporal Completeness (TC):
+Temporal completeness is related to how comprehensively a considered time period is covered by available measurements.
+One approach to temporal completeness of a specified time period could be  
+1. Divide the period of study P into equal-sized chunks of time c.
+2. Establish the required number of measurements for each chunk
+3. Evaluate the temporal completeness TC for each chunk (see below).
+4. Aggregate the temporal completenesses of the chunks to compute the overall temporal completeness of the period  o 
+The temporal completeness (TC) of a chunk of time is defined as:
+
+​
+Where  and  are respectively the actual and required number of measurements in a time chunk Di,. Of course, the required number of measurements is dependent on the choice of the reference. We can consider as a reference a uniform distribution of the measurements over time - i.e. the sum over the sensors of the numbers of required measurements for each sensor, which is the sampling rate of the sensor (number of measurements per minute)  times the number of minutes of the chunk. Otherwise, the measurements can be distributed considering the variation of pollutant levels at different times of the day, month or year..
+
+
+In the domain of sensor data management, it's imperative to intertwine the concept of data validation with the evaluation of completeness. Our data sample validation system  ensures that the transmitted data samples adhere to predefined quality and accuracy standards. In this vein, not all data transmitted by the sensors should be taken into account  in calculating the different facets of completeness. The rationale behind this selective inclusion is grounded in the acknowledgment that sensors, being susceptible to anomalies, calibration drifts, or external interferences, might transmit data points that are outliers or carry inaccurate representations of the monitored parameters. Thus, by deploying a rigorous data validation layer, one ensures that only verified, accurate, and quality-assured data contribute to the calculations of spatial, temporal, and sensor completeness. This nuanced approach not only enhances the robustness and reliability of the monitoring system but also ensures that the derived insights and subsequent decisions are anchored in data that is truly representative of the underlying environmental phenomena. This methodology, therefore, strikes a delicate balance, ensuring that the pursuit of completeness does not inadvertently compromise the quality and reliability of the collected data. 
+
+
+The integral metric of sensor completeness transcends its apparent functional role, emerging as a pivotal indicator, necessitating tailored interventions towards specific sensors within a deployed network. Ensuring an optimal data capture mechanism, sensor completeness effectively maps out the efficiency and reliability with which each sensor accrues and transmits data over a given temporal and spatial domain. A reduced or compromised sensor completeness score signals potential issues within the sensor’s operational framework, such as mechanical malfunctions, calibration drifts, or external interferences, thereby flagging them for an in-depth diagnostic scrutiny or maintenance. This preemptive identification, aided by a vigilant monitoring of sensor completeness, thus, morphs into a proactive maintenance strategy, ensuring that interventions are timely, targeted, and precisely oriented to uphold the sensor's performance and, by extension, the veracity of the data being collated. It acts as a diagnostic tool, identifying potential weaknesses or failures in the sensor network before they metamorphose into significant data gaps or misinforming data, ensuring that the continuity and accuracy of data streams are not just maintained but continually optimized. Consequently, a regular assessment of sensor completeness serves as an invaluable guide, shaping intervention strategies that uphold the robustness and reliability of the sensor network, fostering a data acquisition ecosystem that is both resilient and accurate.
+   17. Spatial Completion in the Face of Sensor Mobility
+Understanding what constitutes a 'complete' dataset, when sensors are constantly moving is a challenge. If the sensors were not mobile, a proper coverage of a region would require a good placement of the sensors, such as a grid pattern for example. Because the sensors are mobile with no centralized orientation (they move independently from one another), the hope for the platform should be that first that all sensors are always returning measurements in different locations with minimum repetitions and that all sensors are spread so that all zones are covered. Of course, this needs to happen every measurement cycle, covering the temporal dimension of the coverage.
+
+
+So we need two formulas: one that demonstrates the Sensor's Mobility. By mobility, it is intended to be a diversification of measurements zones with minimum repetitions. (routines??????). 
+
+
+Evaluating the mobility of sensors not only involves assessing the diversified data each sensor contributes as it moves through different spatial areas, but also analyzing how this mobility (or lack thereof) can be exploited or adjusted to enhance data completeness and reliability. For instance, a sensor with notably low mobility might be strategically replaced with high-fidelity, calibrated sensors or repositioned to areas where its data contributions can be maximized, ensuring that spatial completion is not compromised and that the mobility (or stability) of each sensor is optimally utilized to enhance the overarching data quality and comprehensiveness.
+
+
+With an elevated number of independent sensors, the compounded mobility score of all the region sensors is in itself a good indicator of the probability of proper spatial coverage.   
+
+
+Another indicator that is essential for the covering of all zones is to be 
+
+
+
+
+
+
+allong the displacements of the sensors the  of the . [s]
+Data Aggregation: Leveraging data from multiple mobile sensors to create a fuller picture of air quality over a region, even if individual sensors might have gaps in their coverage.
+Coverage Optimization Techniques:
+Adaptive Sampling: Algorithms that adjust sampling frequency based on environmental conditions or known gaps in coverage.
+Collaborative Sensing: Utilizing data from multiple sensors collaboratively, complementing each other's data to enhance overall coverage.
+   18. Conclusion 
+Evaluating and ensuring comprehensive coverage in mobile sensor networks is both a challenge and a necessity. By understanding the dynamics of mobile sensors, leveraging innovative methodologies, and integrating advanced technologies, achieving a high degree of spatial completion is possible, ensuring effective and informed air quality monitoring.
+8. Limitations 
+   1. Challenges with Mobile Sensor Coverage
+Random Mobility: Unpredictable Movement Patterns: The inherent randomness in the movement of mobile sensors can engender uneven coverage across the surveyed area. This sporadic mobility may lead to over-sampling in certain regions while leaving others underrepresented.
+Addressing Randomness: Mitigating Disparities: The probability of disparities in coverage tends to decrease with the escalation in the number of sensors deployed across the region. A higher density of sensors can compensate for the random movements, thereby providing a more balanced representation of the area under observation.
+Influencing Sensor Paths: Additionally, exploring mechanisms to influence the paths of mobile sensors could further enhance coverage uniformity. This could be achieved through user engagement strategies that incentivize individuals to cover underrepresented areas or by employing predictive models to guide sensor deployment based on historical and real-time data.
+These strategies exemplify a multi-faceted approach to ameliorate the challenges posed by the randomness in mobile sensor movements, striving for a more homogeneous data collection across the designated region.
+Quality Variance: Quality- Mobility Trade-off: There's a palpable trade-off between the mobility of sensors and the quality of data collected. Despite their advantages in covering a wider area, mobile sensors may not always uphold the same level of data accuracy and consistency as their stationary counterparts.
+Ensuring Quality: Data quality amidst the dynamic nature of mobile sensor deployment requires a robust calibration and validation framework. The data preprocessing and validation logic discussed in previous chapters lay the groundwork for tackling this challenge. Additionally, leveraging advanced analytics and machine learning algorithms could further aid in recognizing and correcting anomalies, thereby striving for a balance between mobility and data quality.
+These limitations underscore the necessity for a continued evolution of the proposed mobile sensor data collection and analysis platform, focusing on addressing the challenges tied to mobile sensor coverage and data quality assurance. By grappling with these challenges, we move a step closer to realizing a more reliable and comprehensive environmental monitoring system.
+9. Open problems and future developments
+As described in the preceding chapters, the comprehensive examination and proposal of a mobile sensor data collection and analysis platform lay a foundational framework for addressing several open problems and heralding future advancements in this field. Below are the anticipated future directions and unsolved issues rooted in the groundwork established thus far:
+   2. Future Directions in Coverage Enhancement
+Sensor Fusion: Integrating data from mobile sensors, fixed sensors, satellites, and crowd-sourced platforms presents a significant prospect for augmenting coverage and data richness. The devised platform could serve as a linchpin for such sensor fusion endeavors, making sense of heterogeneous data for a more holistic understanding of environmental conditions.
+AI and Machine Learning: Our endeavors have positioned the system to capitalize on Artificial Intelligence (AI) and Machine Learning (ML) to enhance predictive analytics. By scrutinizing historical data and assessing[t] environmental dynamics, predictive models could be employed to anticipate and bridge potential coverage lacunae, thus ensuring a more robust and seamless data capture and analysis.
+User Engagement: Engaging individuals who use personal mobile sensors to traverse or cover lesser-represented regions could substantially influence the sensor paths, consequently enhancing coverage. The proposed platform could potentially incubate mechanisms for incentivizing such user engagement, perhaps through gamification or other reward schemes.
+Calibration: An ongoing challenge resides in accurately calibrating mobile sensors to ensure data reliability. The architecture delineated herein provides a structure for automating calibration processes based on the operating logic of sensors and employing AI to flag or rectify miscalibrations, providing a stepping stone for addressing this pervasive issue.
+Collaboration: The essence of the proposed platform is collaborative data gathering. Future enhancements could see more sophisticated collaborative frameworks, fostering a coherent, community-driven approach to environmental monitoring and diagnostics.
+Identification of Sources: Accurately identifying and attributing data to specific sources remains a hurdle. The protocols and preprocessing logic established in the platform pave the way for more refined source identification methodologies, ensuring data integrity and traceability.
+Sensor Dysfunction: Dealing with sensor malfunctions and data anomalies is a paramount concern. The platform's outlined preprocessing and validation logic are primed for evolving into more advanced mechanisms for identifying and addressing sensor dysfunctions.
+Pattern Recognition: The unpredictability of user mobility poses a challenge in achieving consistent coverage. The platform's analytical capabilities could be extended to discern patterns in random mobility, enabling a more strategic deployment or incentivization to ameliorate coverage inconsistencies.
+This chapter underscores the potential pathways and existing challenges beckoning attention, deriving its discourse from the substantial groundwork established in the preceding mobile sensor data collection and analysis platform delineation. Each avenue for future exploration and development is tethered to the core objective of enhancing sensor coverage, data accuracy, and the overall efficacy of environmental monitoring endeavors.
+   3. Data Quality Validation
+The platform is a basis that assures data verification according to the manufacturer's specifications. The calibration is not assured. For calibration, a second trusted source of measurement needs to be used to compare values. Our proposition is based on the fact that, independently, we cannot trust the calibration of any sensors, but since we intend on having high maintenance and quality sensors among our population. We have a possibility to compare data of collocated sensors transitively and assert the quality of related measurements.
+Discussion 1 
+How many sensors are needed to one achieve coverage 
+Grill pattern
+And adding randomize movement 
+What is the new ideal flow of the sensors how to approximate the flow
+ 
+10. Conclusion[u]
+
+
+Reiteration of Importance: Understanding and monitoring air quality is not just a scientific endeavor but a necessity for public health, policy formulation, and environmental conservation. With their dynamic nature, mobile sensors offer a promising avenue for achieving this understanding, bridging the gaps left by traditional fixed stations.
+Summary of Key Findings: This paper elucidated the proposed two-tiered database architecture optimized for efficient data management and analysis. Furthermore, we explored the unique challenges of mobile sensor coverage, offering methodologies to evaluate and enhance spatial completion.
+Implications and Applications: The strategies and architectures discussed can revolutionize how municipalities, governments, and organizations approach air quality monitoring. With informed data at their disposal, stakeholders can make decisions that are not only reactive but also proactive, potentially mitigating future air quality crises.
+Future Directions: While the proposed solutions address many current challenges, the rapid pace of technological advancement suggests that new hurdles and opportunities will inevitably emerge. Future research might integrate even more diverse data sources, utilize AI in more advanced predictive capacities, or explore the socio-economic impacts of widespread mobile sensor deployment.
+Final Thoughts: Transforming raw, mobile sensor data into actionable insights is intricate. However, with the right architecture, methodologies, and a forward-looking approach, it is a journey that promises cleaner air, healthier communities, and a more sustainable future.
+
+
+Appendix
+<to be provided>
+Acknowledgments
+<to be provided>
+References
+[1] Ehrlinger, Lisa & Rusz, Elisa & Wöß, Wolfram. (2019). A Survey of Data Quality Measurement and Monitoring Tools. 1
+
+
+[2] Bähr, S., Haas, G.-C., Keusch, F., Kreuter, F., & Trappmann, M. (2022). Missing Data and Other Measurement Quality Issues in Mobile Geolocation Sensor Data. Social Science Computer Review, 40(1), 212–235. https://doi.org/10.1177/0894439320944118
+
+
+[3] Connolly, R. E., Yu, Q., Wang, Z., Chen, Y.-H., Liu, J. Z., Collier-Oxandale, A., Papapostolou, V., Polidori, A., & Zhu, Y. (2022). Long-term evaluation of a low-cost air sensor network for monitoring indoor and outdoor air quality at the community scale. Science of The Total Environment, 807, 150797. https://doi.org/10.1016/j.scitotenv.2021.150797
+
+
+[4] Dessimond, B. (2021). Exposition individuelle à la pollution de l’air—Mesure par capteurs miniatures, modélisation et évaluation des risques sanitaires associés. Sorbonne Université.
+
+
+[5] Dumont Le Brazidec, J., Bocquet, M., Saunier, O., & Roustan, Y. (2023). Bayesian transdimensional inverse reconstruction of the Fukushima Daiichi caesium 137 release. Geoscientific Model Development, 16(3), 1039–1052.         https://doi.org/10.5194/gmd-16-1039-2023
+
+
+[6] Fekih, M. A. (2022). Low-cost wireless sensor networks in participatory air quality monitoring. Université de Lyon.
+Fraden, J. (2016). Handbook of Modern Sensors: Physics, Designs, and Applications. Springer International Publishing. https://doi.org/10.1007/978-3-319-19303-8
+
+
+[7] Huynh, T. L., Fakprapai, S., & Nguyen, T. K. O. (2020). Air Quality monitoring with Focus on Wireless Sensor Application and Data Management. In TORUS 3 – Toward an Open Resource Using Services (pp. 17–40). https://doi.org/10.1002/9781119720522.ch2
+
+
+[8] Karagulian, F., Barbiere, M., Kotsev, A., Spinelle, L., Gerboles, M., Lagler, F., Redon, N., Crunaire, S., & Borowiak, A. (2019). Review of the Performance of Low-Cost Sensors for Air Quality Monitoring. Atmosphere, 10(9). https://doi.org/10.3390/atmos10090506
+
+
+[9] Li, W., Zhang, C., Cui, Y., & Shi, J. (2023). A Collaborative Multi-Granularity Architecture for Multi-Source IoT Sensor Data in Air Quality Evaluations. Electronics, 12(11). https://doi.org/10.3390/electronics12112380
+
+
+[10] Lin, X., Luo, J., Liao, M., Su, Y., Lv, M., Li, Q., Xiao, S., & Xiang, J. (2022). Wearable Sensor-Based Monitoring of Environmental Exposures and the Associated Health Effects: A Review. Biosensors, 12(12). https://doi.org/10.3390/bios12121131
+
+
+[11] Maag, B., Zhou, Z., Saukh, O., & Thiele, L. (2017). SCAN: Multi-Hop Calibration for Mobile Sensor Arrays. Proc. ACM Interact. Mob. Wearable Ubiquitous Technol., 1(2). https://doi.org/10.1145/3090084
+
+
+[12] Nguyen, N. H., Nguyen, H. X., Le, T. T., Vu, C. D., & others. (2021). Evaluating low-cost commercially available sensors for air quality monitoring and application of sensor calibration methods for improving accuracy. Open Journal of Air Pollution, 10(01), 1. https://doi.org/10.4236/ojap.2021.101001
+
+
+[13] Scholl, C., Spiegler, M., Ludwig, K., Eskofier, B. M., Tobola, A., & Zanca, D. (2023). An Integrated Framework for Data Quality Fusion in Embedded Sensor Systems. Sensors, 23(8). https://doi.org/10.3390/s23083798 
+
+
+[14] Sesé, L., Dessimond, B., Gille, T., Pau, G., Uzunhan, Y., Bouvry, D., Hervé, A., Didier, M., Kort, F., Freynet, O., Rotemberg, C., Jeny, F., Khamis, W., Hindre, R., Maesano, C., Planès, C., Nunes, H., & Annesi-Maesano, I. (2023). Low cost air quality portable sensors and their potential use in respiratory health. Int J Tub Lung Dis  (in Press).
+
+
+[15] Tanzer, R., Malings, C., Hauryliuk, A., Subramanian, R., & Presto, A. A. (2019). Demonstration of a Low-Cost Multi-Pollutant Network to Quantify Intra-Urban Spatial Variations in Air Pollutant Source Impacts and to Evaluate Environmental Justice. International Journal of Environmental Research and Public Health, 16(14). https://doi.org/10.3390/ijerph16142523 
+
+
+[16] Teh, H. Y., Kempa-Liehr, A. W., & Wang, K. I.-K. (2020). Sensor data quality: A systematic review. Journal of Big Data, 7(1), 11. https://doi.org/10.1186/s40537-020-0285-1 
+
+
+[17] Vajs, I., Drajic, D., & Cica, Z. (2023). Data-Driven Machine Learning 
+Calibration Propagation in A Hybrid Sensor Network for Air Quality Monitoring. Sensors, 23(5). https://doi.org/10.3390/s23052815 
+
+
+[18] Yatkin, S., Gerboles, M., Borowiak, A., & Signorini, M. (2022). Guidance on low-cost air quality sensor deployment for non-experts based on the AirSensEUR experience. European Commission; JRC Publications Repository. https://doi.org/10.2760/180094 
+
+
+[19] Zauli-Sajani, S., Marchesi, S., Pironi, C., Barbieri, C., Poluzzi, V., & Colacci, A. (2021). Assessment of air quality sensor system performance after relocation. Atmospheric Pollution Research, 12(2), 282–291. https://doi.org/10.1016/j.apr.2020.11.010
+
+
+[20] Belussi, A., Migliorini, S., & Eldawy, A. (2018). Detecting Skewness of Big Spatial Data in SpatialHadoop. Proceedings of the 26th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems, 432–435.         https://doi.org/10.1145/3274895.3274923         
+
+
+[21] Liu, C., Nitschke, P., Williams, S. P., & Zowghi, D. (2020). Data quality and the Internet of Things. Computing, 102(2), 573–599. https://doi.org/10.1007/s00607-019-00746-z 
+
+
+[22] ISO 25000 Portal (2019) ISO/IEC 25012. https://iso25000.com/index.php/en/iso-25000-standards/iso-25012. ISO 25000 Standards.
+
+
+Authors’ information
+
+
+1First author affiliation.
+2Second author affiliation.
+  
+
+Ariele Maesano, LAboratoire en Sciences et Technologies de l’Information Géographique (LASTIG), Université Gustave Eiffel, EIVP, 80 rue Rébeval, F-75019 Paris, France ariele.maensano@eivp-paris.fr  
+
+
+Mohamed Chachoua, LAboratoire en Sciences et Technologies de l’Information Géographique (LASTIG), Université Gustave Eiffel, EIVP, 80 rue Rébeval, F-75019 Paris, France chachoua@eivp-paris.fr  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Copyright © 2023 <to be provided> - All rights reserved                                              International Review on Computers and Software, Vol. xx, n. x
+[a]Mohamed -> Peut être parler de la modélisation aussi, pour faire un système complet d'évaluation de la pollution?
+[b]Mohamed -> on reparlera de cette partie. A mon avis, il faut pas trop se disperser...
+[c]Mohamed -> La partie verte est enlevé d'ici
+[d]Mohamed -> La partie verte est enlevé d'ici
+[e]Mohamed ->Mettre peut être la définition de la notion de la qualité avant, puis parler comment se fait la représentation ensuite dans l'état de l'art... et ajouter les références biblio
+[f]Mohamed -> Dans le cas de la pollution de l'air, préciser peut être qu'il s'agit de la complétude spatio-temporelle... avec les références (articles ou thèse de souheir)
+[g]Mohamed ->Mettre peut être la définition de la notion de la qualité avant, puis parler comment se fait la représentation ensuite dans l'état de l'art... et ajouter les références biblio
+[h]?????????
+[i]You need something as a configuration file associated to the Verified Data Sample Repository
+[j]I prefer dropping this example
+[k]It lacks the reference to the temperature components
+[l]Perhaps description as for the operations Conditional and Cancel
+[m]This is not an executable language so the natural language must be used for comments. You are not obliged to detail the executable language, you can put ...
+[n]I do not understand
+[o]If you introduce the notion of Project (or deployment) This notion should be saved in the Sensor and Component Registry & Repository.  You can put in the project the transformation of temperature units
+[p]Where is defined the "predefined communication protocol"?
+[q]It is not clear if this concerns sensor types or sensor instances
+[r]Change the names 
+Primary Database to Validated Data Sample Repository
+You need a conditional, if the data is not validated what do you do?
+[s]??????
+[t]"Dirty data" refers to data that is inaccurate, incomplete, inconsistent, or contains errors or anomalies. It's a common issue in data analysis and can arise for various reasons, including data entry mistakes, system glitches, or issues during data collection and storage. Dealing with dirty data is a crucial step in the data cleaning and preprocessing process to ensure the reliability of your analysis and results.
+
+
+Here are some common types of data issues that fall under the category of dirty data:
+
+
+Missing Values: Data with missing values can make analysis challenging. You may need to decide whether to impute missing values or exclude rows/columns with missing data.
+
+
+Duplicate Records: Duplicate entries in a dataset can lead to inflated results and skew analysis. Identifying and removing duplicates is essential.
+
+
+Inconsistent Data: Inconsistencies can include variations in naming conventions, units of measurement, or date formats. Standardizing data can help resolve these issues.
+
+
+Outliers: Outliers are data points significantly different from the majority of the data. Deciding whether to remove, transform, or keep outliers depends on the context of the analysis.
+
+
+Data Entry Errors: Typos, incorrect data, or other human errors during data entry can introduce inaccuracies.
+
+
+Incomplete Data: Incomplete records may lack essential information, making them less useful for analysis.
+
+
+To address dirty data, data cleaning techniques and tools are used. These can involve data validation, transformation, and imputation to make the data suitable for analysis. Popular data analysis libraries like Pandas in Python provide functions and methods for handling dirty data.
+
+
+Data cleaning is an essential step in the data analysis process because the quality of your analysis and the reliability of your insights depend on having clean, accurate data.
+
+
+User
+what is the difference between outliers data and observed irregularities?
+ChatGPT
+Outliers and observed irregularities are related concepts in data analysis, but they have distin
+[u]Conclusion (and introduction) can be redacted when the other paragraphs are fixed
